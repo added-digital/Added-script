@@ -18,7 +18,7 @@ document.fonts.ready.then(() => {
           .from(self.lines, {
             yPercent: 110,
             delay: 0.2,
-            duration: 0.8,
+            duration: 2,
             stagger: { amount: 0.5 },
           });
       },
