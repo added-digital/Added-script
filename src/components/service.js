@@ -1,6 +1,7 @@
 exports.service_scroll = function () {
   // Get text elements to animate
   const textElements = document.querySelectorAll("[data-scroll-text]");
+  const service_headline = document.querySelectorAll(".service_item-wrapper");
 
   // Create split text instances
   textElements.forEach((text) => {
@@ -8,19 +9,46 @@ exports.service_scroll = function () {
     gsap.set(text, { visibility: "visible" });
 
     // Split into characters
-    const split = new SplitText(text, {
+    const headline_split = new SplitText(text, {
       type: "chars, words",
       charsClass: "char",
     });
 
+    const service_headline_split = new SplitText(service_headline, {
+      type: "lines",
+      charsClass: "char",
+      wordsClass: "word",
+      linesClass: "line",
+    });
+    document.fonts.ready.then(() => {
+      gsap.from(service_headline_split.lines, {
+        scrollTrigger: {
+          trigger: text,
+          start: "top 80%",
+          toggleActions: "play none none reverse",
+        },
+        opacity: 0,
+        y: 20,
+        filter: "blur(10px)",
+        stagger: 0.1,
+        ease: "power2.out",
+        duration: 0.5,
+      });
+    });
+
     // Create scroll-triggered animation
     document.fonts.ready.then(() => {
-      gsap.from(split.chars, {
+      gsap.from(headline_split.chars, {
+        scrollTrigger: {
+          trigger: text,
+          start: "top 80%",
+          toggleActions: "play none none reverse",
+        },
         opacity: 0,
         y: 20,
         rotateX: -90,
         filter: "blur(10px)",
-        stagger: 0.02,
+        stagger: 0.01,
         ease: "power2.out",
         duration: 0.5,
       });
@@ -63,24 +91,38 @@ exports.service_headline = function () {
       const service_pills = document.querySelector(
         `[data-service-pills="${index}"]`
       );
+
+      const service_text_split = new SplitText(service_text, {
+        type: "words",
+        wordsClass: "word",
+      });
+
       const pills = service_pills
         ? service_pills.querySelectorAll(".service_pill")
         : [];
 
-      // First, hide all tabs immediately
       all_service_tab.forEach((tab) => {
         gsap.set(tab, { display: "none" });
       });
 
       this.classList.add("active");
 
-      // Then show and animate the selected tab
       if (service_tab) {
         gsap.set(service_tab, { display: "flex" });
 
-        gsap.fromTo(service_text, { opacity: 0, y: -20 }, { opacity: 1, y: 0 });
+        gsap.fromTo(
+          service_text_split.words,
+          { opacity: 0, y: -20, filter: "blur(10px)" },
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.5,
+            stagger: 0.01,
+            filter: "blur(0px)",
+            ease: "power2.out",
+          }
+        );
 
-        // Animate individual pills with stagger
         if (pills.length > 0) {
           gsap.fromTo(
             pills,

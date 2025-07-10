@@ -122,7 +122,7 @@ drawTl
 
 document.addEventListener("DOMContentLoaded", () => {
   const animatedSquare = document.getElementById("path");
-  const matchingDiv = document.getElementById("d-checker");
+  const matchingDiv = document.getElementById("nav_transition");
 
   if (animatedSquare && matchingDiv) {
     function syncWidth() {
