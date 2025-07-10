@@ -16,20 +16,13 @@ exports.service_scroll = function () {
     // Create scroll-triggered animation
     document.fonts.ready.then(() => {
       gsap.from(split.chars, {
-        scrollTrigger: {
-          trigger: text,
-          start: "top 90%", // Starts animation when element is 80% from top of viewport
-          end: "top 40%",
-          scrub: true, // Smooth animation that follows scroll position
-          toggleActions: "play none none reverse",
-        },
         opacity: 0,
         y: 20,
         rotateX: -90,
         filter: "blur(10px)",
         stagger: 0.02,
         ease: "power2.out",
-        duration: 1,
+        duration: 0.5,
       });
     });
   });
@@ -38,67 +31,70 @@ exports.service_scroll = function () {
 exports.service_headline = function () {
   const headline = document.querySelectorAll(".service_item-wrapper");
 
+  const all_service_tab = document.querySelectorAll(".service_text-wrapper");
+  gsap.set(all_service_tab, { display: "none" });
+
+  // Set the first service tab to visible on initial load
+  const firstTab = document.querySelector('[data-service-tab="0"]');
+  if (firstTab) {
+    gsap.set(firstTab, { display: "flex" });
+  }
+
+  // Set the first service item wrapper to active
+  const firstHeadline = document.querySelector(".service_item-wrapper");
+  if (firstHeadline) {
+    firstHeadline.classList.add("active");
+  }
+
   headline.forEach((item, index) => {
     item.addEventListener("click", function () {
-      // Remove active class from all service item wrappers
       headline.forEach((wrapper) => {
         wrapper.classList.remove("active");
       });
 
-      // Add active class to the clicked item
-      this.classList.add("active");
+      const service_tab = document.querySelector(
+        `[data-service-tab="${index}"]`
+      );
 
-      // Get the corresponding text block and pill wrapper
-      const textBlock = document.querySelector(
+      const service_text = document.querySelector(
         `[data-service-text="${index}"]`
       );
-      const pillWrapper = document.querySelector(
+
+      const service_pills = document.querySelector(
         `[data-service-pills="${index}"]`
       );
-      const pills = pillWrapper
-        ? pillWrapper.querySelectorAll(".service_pill")
+      const pills = service_pills
+        ? service_pills.querySelectorAll(".service_pill")
         : [];
 
-      // Hide all text blocks and pill wrappers first
-      const allTextBlocks = document.querySelectorAll("[data-service-text]");
-      const allPillWrappers = document.querySelectorAll("[data-service-pills]");
-
-      // Hide all text blocks with display: none and reset opacity
-      allTextBlocks.forEach((block) => {
-        gsap.set(block, { display: "none", opacity: 0, y: -20 });
+      // First, hide all tabs immediately
+      all_service_tab.forEach((tab) => {
+        gsap.set(tab, { display: "none" });
       });
 
-      gsap.to(allPillWrappers, {
-        opacity: 0,
-        y: -10,
-        duration: 0.3,
-        ease: "power2.out",
-      });
+      this.classList.add("active");
 
-      if (textBlock) {
-        // Set display to block first, then animate
-        gsap.set(textBlock, { display: "block" });
-        gsap.to(textBlock, {
-          opacity: 1,
-          y: 0,
-          duration: 0.5,
-          ease: "power2.out",
-          delay: 0.2,
-        });
+      // Then show and animate the selected tab
+      if (service_tab) {
+        gsap.set(service_tab, { display: "flex" });
+
+        gsap.fromTo(service_text, { opacity: 0, y: -20 }, { opacity: 1, y: 0 });
+
+        // Animate individual pills with stagger
+        if (pills.length > 0) {
+          gsap.fromTo(
+            pills,
+            { opacity: 0, x: 30 },
+            {
+              opacity: 1,
+              x: 0,
+              duration: 0.5,
+              stagger: 0.2,
+              ease: "back.out(1.7)",
+            }
+          );
+        }
       }
-
-      gsap.to(pillWrapper, {
-        opacity: 1,
-      });
-
-      gsap.from(pills, {
-        opacity: 0,
-        y: -10,
-        duration: 0.4,
-        stagger: 0.2,
-        ease: "expo.out",
-        delay: 0.3,
-      });
     });
   });
 };
