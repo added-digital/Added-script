@@ -36,88 +36,69 @@ exports.service_scroll = function () {
 };
 
 exports.service_headline = function () {
-  const rail = document.querySelector(".services_rail");
-  const headlines = document.querySelectorAll("[data-service-headline]");
-  const explainers = document.querySelectorAll("[data-service-explainer]");
-  if (!rail || headlines.length === 0 || explainers.length !== headlines.length)
-    return;
+  const headline = document.querySelectorAll(".service_item-wrapper");
 
-  // Hide all headlines and explainers initially
-  headlines.forEach((h) =>
-    gsap.set(h, {
-      autoAlpha: 0,
-      y: 100,
-      position: "absolute",
-    })
-  );
-  explainers.forEach((e) =>
-    gsap.set(e, {
-      autoAlpha: 0,
-    })
-  );
+  headline.forEach((item, index) => {
+    item.addEventListener("click", function () {
+      // Remove active class from all service item wrappers
+      headline.forEach((wrapper) => {
+        wrapper.classList.remove("active");
+      });
 
-  // Reveal each headline, animate out the previous one, and scramble explainer
-  headlines.forEach((headline, i) => {
-    const progress = [0, 0.3, 0.6][i]; // 0%, 30%, 60%
-    const tl = gsap.timeline({
-      scrollTrigger: {
-        trigger: rail,
-        start: () => `top+=${progress * rail.offsetHeight} center`,
-        end: () => `top+=${(progress + 0.1) * rail.offsetHeight} center`,
-        scrub: true,
-        toggleActions: "play reverse play reverse",
-      },
-    });
+      // Add active class to the clicked item
+      this.classList.add("active");
 
-    // Animate previous headline out
-    if (i > 0) {
-      tl.to(
-        headlines[i - 1],
-        {
-          autoAlpha: 0,
-          y: -100,
-          duration: 1,
-          ease: "power2.inout",
-        },
-        0
+      // Get the corresponding text block and pill wrapper
+      const textBlock = document.querySelector(
+        `[data-service-text="${index}"]`
       );
-      tl.to(
-        explainers[i - 1],
-        {
-          autoAlpha: 0,
+      const pillWrapper = document.querySelector(
+        `[data-service-pills="${index}"]`
+      );
+      const pills = pillWrapper
+        ? pillWrapper.querySelectorAll(".service_pill")
+        : [];
+
+      // Hide all text blocks and pill wrappers first
+      const allTextBlocks = document.querySelectorAll("[data-service-text]");
+      const allPillWrappers = document.querySelectorAll("[data-service-pills]");
+
+      // Hide all text blocks with display: none and reset opacity
+      allTextBlocks.forEach((block) => {
+        gsap.set(block, { display: "none", opacity: 0, y: -20 });
+      });
+
+      gsap.to(allPillWrappers, {
+        opacity: 0,
+        y: -10,
+        duration: 0.3,
+        ease: "power2.out",
+      });
+
+      if (textBlock) {
+        // Set display to block first, then animate
+        gsap.set(textBlock, { display: "block" });
+        gsap.to(textBlock, {
+          opacity: 1,
+          y: 0,
           duration: 0.5,
-          ease: "power2.inout",
-        },
-        0
-      );
-    }
+          ease: "power2.out",
+          delay: 0.2,
+        });
+      }
 
-    // Animate current headline in
-    tl.to(
-      headline,
-      {
-        autoAlpha: 1,
-        y: 0,
-        duration: 1,
-        ease: "power2.inout",
-      },
-      0
-    );
+      gsap.to(pillWrapper, {
+        opacity: 1,
+      });
 
-    // Scramble in the explainer text
-    tl.to(
-      explainers[i],
-      {
-        autoAlpha: 1,
-        duration: 2,
-        ease: "power2.inout",
-        scrambleText: {
-          text: explainers[i].dataset.scrambleText || explainers[i].textContent,
-          chars: "lowerCase",
-          speed: 0.3,
-        },
-      },
-      0.2 // Slightly after headline animates in
-    );
+      gsap.from(pills, {
+        opacity: 0,
+        y: -10,
+        duration: 0.4,
+        stagger: 0.2,
+        ease: "expo.out",
+        delay: 0.3,
+      });
+    });
   });
 };
