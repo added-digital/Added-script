@@ -1,0 +1,25 @@
+{
+  "name": "added-website",
+  "version": "1.0.0",
+  "description": "",
+  "homepage": "https://github.com/added-digital/Added-script#readme",
+  "bugs": {
+    "url": "https://github.com/added-digital/Added-script/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/added-digital/Added-script.git"
+  },
+  "license": "ISC",
+  "author": "",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "webpack",
+    "dev": "webpack --watch --progress"
+  },
+  "devDependencies": {
+    "webpack-cli": "^6.0.1"
+  }
+}
