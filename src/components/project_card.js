@@ -24,7 +24,7 @@ exports.project_card = function () {
 
   const stConfig = {
     trigger: ".card-flip_component",
-    start: "top center",
+    start: "top 60%",
     end: "bottom bottom",
     scrub: true,
     onEnter: () => gsap.to(".section_hero", { opacity: 0, duration: 0.5 }),
