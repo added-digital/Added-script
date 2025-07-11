@@ -66,31 +66,39 @@ exports.d_animation = function () {
       },
       "<"
     )
-    .to(drawSvgPaths, {
-      color: "white",
-      duration: 0.6,
-      ease: "power1.inOut",
-    })
-    .to(drawSvgPaths, {
-      transformOrigin: "50% 50%",
-
-      scale: () => {
-        const path = drawSvgPaths[0];
-        if (!path) return 1;
-
-        const pathRect = path.getBoundingClientRect();
-        const viewportWidth = window.innerWidth;
-        const viewportHeight = window.innerHeight;
-
-        const scaleX = viewportWidth / pathRect.width;
-        const scaleY = viewportHeight / pathRect.height;
-
-        return Math.max(scaleX, scaleY);
+    .to(
+      drawSvgPaths,
+      {
+        color: "white",
+        duration: 0.3,
+        ease: "power1.inOut",
       },
+      "-=0.1"
+    )
+    .to(
+      drawSvgPaths,
+      {
+        transformOrigin: "50% 50%",
 
-      ease: "expo.inOut",
-      duration: 1,
-    })
+        scale: () => {
+          const path = drawSvgPaths[0];
+          if (!path) return 1;
+
+          const pathRect = path.getBoundingClientRect();
+          const viewportWidth = window.innerWidth;
+          const viewportHeight = window.innerHeight;
+
+          const scaleX = viewportWidth / pathRect.width;
+          const scaleY = viewportHeight / pathRect.height;
+
+          return Math.max(scaleX, scaleY);
+        },
+
+        ease: "expo.inOut",
+        duration: 1,
+      },
+      "-=0.2"
+    )
     .from(
       ".section_clients",
       {
