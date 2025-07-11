@@ -1,15 +1,23 @@
 exports.project_card = function () {
-  const leftTextEl = document.querySelector(".side-text--left");
-  const rightTextEl = document.querySelector(".side-text--right");
+  const leftTextEls = document.querySelectorAll(".side-text--left");
+  const rightTextEls = document.querySelectorAll(".side-text--right");
+  const textElsWrapper = document.querySelectorAll(".card_text-wrapper");
 
   const sideText = [
     { left: "Supernormal greens", right: "Website" },
-    { left: "Cur8", right: "Sales portal" },
-    { left: "Stureplans Resor", right: "Website" },
+    { left: "Falkenklev", right: "Website" },
+    { left: "KLTK", right: "Booking system" },
     { left: "Jord", right: "Website" },
     { left: "Sylvera", right: "Website" },
   ];
 
+  leftTextEls.forEach((el, i) => {
+    el.textContent = sideText[i].left;
+  });
+
+  rightTextEls.forEach((el, i) => {
+    el.textContent = sideText[i].right;
+  });
   const cards = gsap.utils.toArray(
     ".card-flip_component .flip_list .flip_card"
   );
@@ -23,6 +31,16 @@ exports.project_card = function () {
     onLeaveBack: () => gsap.to(".section_hero", { opacity: 1, duration: 0.5 }),
   };
 
+  const textWrapperConfig = {
+    trigger: ".card-flip_component",
+    start: "top top",
+    end: "bottom bottom",
+    scrub: true,
+    onEnter: () => gsap.to(".card_text-wrapper", { opacity: 1, duration: 0.3 }),
+    onLeaveBack: () =>
+      gsap.to(".card_text-wrapper", { opacity: 0, duration: 0.3 }),
+  };
+
   const enterDuration = 1;
   const stackDuration = 0.5;
   const stagger = 0.75;
@@ -34,7 +52,7 @@ exports.project_card = function () {
   // 4) TIMELINE #1: cardStackTl
   // ────────────────────────────────────────────────────────
   const cardStackTl = gsap.timeline({ scrollTrigger: stConfig });
-
+  const textWrapperTl = gsap.timeline({ scrollTrigger: textWrapperConfig });
   // initial positions
   gsap.set(cards, {
     y: yStart,
@@ -58,6 +76,43 @@ exports.project_card = function () {
           ease: "power2.out",
         },
         label
+      )
+      // animate left and right text for this card, moving them up by 100% times i
+      .to(
+        leftTextEls[i],
+        {
+          y: `-${100 * i}%`,
+          duration: 0.2,
+          ease: "power2.out",
+        },
+        label + "+=0.3"
+      )
+      .to(
+        rightTextEls[i],
+        {
+          y: `-${100 * i}%`,
+          duration: 0.2,
+          ease: "power2.out",
+        },
+        label + "+=0.3"
+      )
+      .to(
+        rightTextEls[i - 1],
+        {
+          y: `-${100 * i + 1}%`,
+          duration: 0.2,
+          ease: "power2.out",
+        },
+        label + "+=0.3"
+      )
+      .to(
+        leftTextEls[i - 1],
+        {
+          y: `-${100 * i + 1}%`,
+          duration: 0.2,
+          ease: "power2.out",
+        },
+        label + "+=0.3"
       );
 
     // shrink & lift all the ones under it
@@ -75,46 +130,51 @@ exports.project_card = function () {
           `${label}+=0.3`
         );
       });
+      textWrapperTl.to(
+        textElsWrapper[i],
+        { opacity: 1, duration: 0.3 },
+        `${label}+=0.3`
+      );
     }
   });
 
   // ────────────────────────────────────────────────────────
   // 5) TIMELINE #2: textSwapTl
   // ────────────────────────────────────────────────────────
-  const textSwapTl = gsap.timeline({ scrollTrigger: stConfig });
+  // const textSwapTl = gsap.timeline({ scrollTrigger: stConfig });
 
-  cards.forEach((_, i) => {
-    const label = `card${i + 1}`;
-    const pos = i === 0 ? 0 : `card${i}+=${stagger}`;
+  // cards.forEach((_, i) => {
+  //   const label = `card${i + 1}`;
+  //   const pos = i === 0 ? 0 : `card${i}+=${stagger}`;
 
-    textSwapTl
-      .addLabel(label, pos)
-      // fire your scramble on both text blocks
-      .add(() => {
-        if (window.innerWidth > 768) {
-          gsap.to(leftTextEl, {
-            duration: 0.8,
-            ease: "none",
-            scrambleText: {
-              text: sideText[i].left,
-              chars: "lowerCase",
-              speed: 0.3,
-            },
-          });
-          gsap.to(rightTextEl, {
-            duration: 0.8,
-            ease: "none",
-            scrambleText: {
-              text: sideText[i].right,
-              chars: "lowerCase",
-              speed: 0.3,
-            },
-          });
-        } else {
-          // small‐screen fallback
-          leftTextEl.textContent = sideText[i].left;
-          rightTextEl.textContent = sideText[i].right;
-        }
-      }, `${label}+=0.1`);
-  });
+  //   textSwapTl
+  //     .addLabel(label, pos)
+  //     // fire your scramble on both text blocks
+  //     .add(() => {
+  //       if (window.innerWidth > 768) {
+  //         gsap.to(leftTextEl, {
+  //           duration: 0.8,
+  //           ease: "none",
+  //           scrambleText: {
+  //             text: sideText[i].left,
+  //             chars: "lowerCase",
+  //             speed: 0.3,
+  //           },
+  //         });
+  //         gsap.to(rightTextEl, {
+  //           duration: 0.8,
+  //           ease: "none",
+  //           scrambleText: {
+  //             text: sideText[i].right,
+  //             chars: "lowerCase",
+  //             speed: 0.3,
+  //           },
+  //         });
+  //       } else {
+  //         // small‐screen fallback
+  //         leftTextEl.textContent = sideText[i].left;
+  //         rightTextEl.textContent = sideText[i].right;
+  //       }
+  //     }, `${label}+=0.1`);
+  // });
 };
