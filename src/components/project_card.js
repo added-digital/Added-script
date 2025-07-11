@@ -21,29 +21,45 @@ exports.project_card = function () {
   const cards = gsap.utils.toArray(
     ".card-flip_component .flip_list .flip_card"
   );
-
   const stConfig = {
     trigger: ".card-flip_component",
-    start: "top 60%",
+    start: "top center",
     end: "bottom bottom",
     scrub: true,
-    onEnter: () => gsap.to(".section_hero", { opacity: 0, duration: 0.5 }),
-    onLeaveBack: () => gsap.to(".section_hero", { opacity: 1, duration: 0.5 }),
   };
+  const heroOpacityConfig = {
+    trigger: ".card-flip_component",
+    start: "top 30%",
+    end: "bottom bottom",
+    scrub: true,
+    onEnter: () => {
+      gsap.to(".section_hero", { opacity: 0, duration: 0.5 });
+    },
+    onLeaveBack: () => {
+      gsap.to(".section_hero", { opacity: 1, duration: 0.5 });
+    },
+  };
+
   gsap.set(textElsWrapper, { opacity: 0, filter: "blur(10px)" });
+
   const textWrapperConfig = {
     trigger: ".card-flip_component",
     start: "top top",
     end: "bottom bottom",
     scrub: true,
-    onEnter: () =>
+    onEnter: () => {
       gsap.to(".card_text-wrapper", {
         opacity: 1,
         filter: "blur(0px)",
         duration: 0.3,
-      }),
-    onLeaveBack: () =>
-      gsap.to(".card_text-wrapper", { opacity: 0, filter: "blur(10px)" }),
+      });
+    },
+    onLeaveBack: () => {
+      gsap.to(".card_text-wrapper", {
+        opacity: 0,
+        filter: "blur(10px)",
+      });
+    },
   };
 
   const enterDuration = 1;
@@ -58,6 +74,7 @@ exports.project_card = function () {
   // ────────────────────────────────────────────────────────
   const cardStackTl = gsap.timeline({ scrollTrigger: stConfig });
   const textWrapperTl = gsap.timeline({ scrollTrigger: textWrapperConfig });
+  const heroOpacityTl = gsap.timeline({ scrollTrigger: heroOpacityConfig });
   // initial positions
   gsap.set(cards, {
     y: yStart,
