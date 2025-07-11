@@ -30,15 +30,20 @@ exports.project_card = function () {
     onEnter: () => gsap.to(".section_hero", { opacity: 0, duration: 0.5 }),
     onLeaveBack: () => gsap.to(".section_hero", { opacity: 1, duration: 0.5 }),
   };
-
+  gsap.set(textElsWrapper, { opacity: 0, filter: "blur(10px)" });
   const textWrapperConfig = {
     trigger: ".card-flip_component",
     start: "top top",
     end: "bottom bottom",
     scrub: true,
-    onEnter: () => gsap.to(".card_text-wrapper", { opacity: 1, duration: 0.3 }),
+    onEnter: () =>
+      gsap.to(".card_text-wrapper", {
+        opacity: 1,
+        filter: "blur(0px)",
+        duration: 0.3,
+      }),
     onLeaveBack: () =>
-      gsap.to(".card_text-wrapper", { opacity: 0, duration: 0.3 }),
+      gsap.to(".card_text-wrapper", { opacity: 0, filter: "blur(10px)" }),
   };
 
   const enterDuration = 1;
