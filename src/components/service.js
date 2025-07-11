@@ -98,7 +98,11 @@ exports.service_headline = function () {
       });
 
       const pills = service_pills
-        ? service_pills.querySelectorAll(".service_pill")
+        ? service_pills.querySelectorAll("[data-service-explainer]")
+        : [];
+
+      const pillLines = service_pills
+        ? service_pills.querySelectorAll(".service_pill-line")
         : [];
 
       all_service_tab.forEach((tab) => {
@@ -112,7 +116,7 @@ exports.service_headline = function () {
 
         gsap.fromTo(
           service_text_split.words,
-          { opacity: 0, y: -20, filter: "blur(10px)" },
+          { opacity: 0, y: 20, filter: "blur(10px)" },
           {
             opacity: 1,
             y: 0,
@@ -126,13 +130,30 @@ exports.service_headline = function () {
         if (pills.length > 0) {
           gsap.fromTo(
             pills,
-            { opacity: 0, x: 30 },
+            { opacity: 0, y: 30, filter: "blur(10px)" },
             {
               opacity: 1,
-              x: 0,
+              y: 0,
+              filter: "blur(0px)",
               duration: 0.5,
-              stagger: 0.2,
-              ease: "back.out(1.7)",
+              stagger: 0.1,
+              ease: "expo.out",
+              delay: 0.2,
+            }
+          );
+        }
+
+        if (pillLines.length > 0) {
+          gsap.fromTo(
+            pillLines,
+            { width: 0 },
+            {
+              opacity: 1,
+              width: "100%",
+              duration: 1,
+              stagger: 0.1,
+              ease: "expo.out",
+              delay: 0.2,
             }
           );
         }

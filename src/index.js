@@ -100,10 +100,12 @@ document.fonts.ready.then(() => {
           })
           .from(self.chars, {
             opacity: 0,
-            x: 50,
-            stagger: 0.03,
-            duration: 0.6,
-            ease: "back.out(1.5)",
+            y: 50,
+            rotateX: -90,
+            filter: "blur(10px)",
+            stagger: 0.02,
+            ease: "power2.out",
+            duration: 1,
           });
       },
     });

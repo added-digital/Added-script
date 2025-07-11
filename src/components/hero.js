@@ -5,7 +5,7 @@ exports.hero = function () {
   const d2 = document.getElementById("d2");
   const e = document.getElementById("e");
   const d3 = document.getElementById("d3");
-
+  const { createLogoAnimation } = require("../reusables/logo");
   const tl = gsap.timeline();
 
   const navlinks = document.querySelectorAll(".nav_link");
@@ -13,7 +13,7 @@ exports.hero = function () {
   const hero_header = document.querySelector("[data-lines-hero='true']");
   gsap.set(hero_header, { visibility: "visible" });
 
-  const hero_text = document.querySelector(".hero_text-wrapper");
+  const hero_text = document.querySelector("[data-hero-text]");
   gsap.set(hero_text, { visibility: "visible" });
 
   const hero_text_split = SplitText.create(hero_text, {
@@ -26,47 +26,9 @@ exports.hero = function () {
     linesClass: "line",
   });
 
-  tl.from(a, {
-    x: "-110%",
-    ease: "expo.out",
-    duration: 1,
-  })
-    .from(
-      d1,
-      {
-        x: "-110%",
-        ease: "expo.out",
-        duration: 1,
-      },
-      "=-0.8"
-    )
-    .from(
-      d2,
-      {
-        x: "-110%",
-        ease: "expo.out",
-        duration: 1,
-      },
-      "=-0.8"
-    )
-    .from(
-      e,
-      {
-        ease: "expo.out",
-        x: "-110%",
-        duration: 1,
-      },
-      "=-0.8"
-    )
-    .from(
-      d3,
-      {
-        ease: "expo.out",
-        x: "-110%",
-        duration: 1,
-      },
-      "=-0.8"
-    )
+  const logoTl = createLogoAnimation(tl, a, d1, d2, e, d3);
+
+  logoTl
     .from(logo, {
       top: "50%",
       left: "50%",
