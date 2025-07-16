@@ -25,7 +25,7 @@ exports.d_animation = function () {
   const drawTl = gsap.timeline({
     scrollTrigger: {
       trigger: ".section_draw-rail",
-      start: "top 80%",
+      start: "top 40%",
       end: "bottom 70%",
       scrub: 1,
     },
@@ -66,39 +66,31 @@ exports.d_animation = function () {
       },
       "<"
     )
-    .to(
-      drawSvgPaths,
-      {
-        color: "white",
-        duration: 0.3,
-        ease: "power1.inOut",
+    .to(drawSvgPaths, {
+      color: "white",
+      duration: 0.6,
+      ease: "power1.inOut",
+    })
+    .to(drawSvgPaths, {
+      transformOrigin: "50% 50%",
+
+      scale: () => {
+        const path = drawSvgPaths[0];
+        if (!path) return 1;
+
+        const pathRect = path.getBoundingClientRect();
+        const viewportWidth = window.innerWidth;
+        const viewportHeight = window.innerHeight;
+
+        const scaleX = viewportWidth / pathRect.width;
+        const scaleY = viewportHeight / pathRect.height;
+
+        return Math.max(scaleX, scaleY);
       },
-      "-=0.1"
-    )
-    .to(
-      drawSvgPaths,
-      {
-        transformOrigin: "50% 50%",
 
-        scale: () => {
-          const path = drawSvgPaths[0];
-          if (!path) return 1;
-
-          const pathRect = path.getBoundingClientRect();
-          const viewportWidth = window.innerWidth;
-          const viewportHeight = window.innerHeight;
-
-          const scaleX = viewportWidth / pathRect.width;
-          const scaleY = viewportHeight / pathRect.height;
-
-          return Math.max(scaleX, scaleY);
-        },
-
-        ease: "expo.inOut",
-        duration: 1,
-      },
-      "-=0.2"
-    )
+      ease: "expo.inOut",
+      duration: 1,
+    })
     .from(
       ".section_clients",
       {

@@ -29,6 +29,7 @@ document.fonts.ready.then(() => {
   document.querySelectorAll("[data-line-reveal='true']").forEach((text) => {
     SplitText.create(text, {
       type: "lines",
+      mask: "lines",
       autoSplit: true,
       linesClass: "line",
       onSplit(self) {
@@ -36,8 +37,8 @@ document.fonts.ready.then(() => {
           .timeline({
             scrollTrigger: {
               trigger: text,
-              start: "top bottom",
-              end: "top 50%",
+              start: "top 90%",
+              end: "top 100%",
               toggleActions: "none play reverse none reset",
             },
           })
@@ -45,9 +46,8 @@ document.fonts.ready.then(() => {
             opacity: 0,
             y: 100,
             stagger: 0.1,
-            filter: "blur(10px)",
             duration: 1,
-            ease: "power2.out",
+            ease: "expo.out",
           });
       },
     });
@@ -58,7 +58,6 @@ document.fonts.ready.then(() => {
   document.querySelectorAll("[data-word-reveal='true']").forEach((text) => {
     SplitText.create(text, {
       type: "words, chars",
-      mask: "words",
       wordsClass: "word",
       charsClass: "char",
       onSplit(self) {
@@ -66,17 +65,19 @@ document.fonts.ready.then(() => {
           .timeline({
             scrollTrigger: {
               trigger: text,
-              start: "top bottom",
-              end: "top 80%",
+              start: "top 90%",
+              end: "top 100%",
               toggleActions: "reverse play reverse none reset",
             },
           })
           .from(self.words, {
-            y: "150%",
-            rotation: 10,
-            stagger: 0.05,
-            duration: 0.5,
-            ease: "back.out(1.5)",
+            opacity: 0,
+            y: 50,
+            rotateX: -90,
+            filter: "blur(10px)",
+            stagger: 0.02,
+            ease: "power2.out",
+            duration: 1,
           });
       },
     });
@@ -86,15 +87,16 @@ document.fonts.ready.then(() => {
 
   document.querySelectorAll("[data-char-reveal='true']").forEach((text) => {
     SplitText.create(text, {
-      type: "chars",
+      type: "chars, words",
+      wordsClass: "word",
       charsClass: "char",
       onSplit(self) {
         return gsap
           .timeline({
             scrollTrigger: {
               trigger: text,
-              start: "top bottom",
-              end: "top 90%",
+              start: "top 90%",
+              end: "top 100%",
               toggleActions: "none play reverse none reset",
             },
           })
@@ -113,3 +115,20 @@ document.fonts.ready.then(() => {
     gsap.set(text, { visibility: "visible" });
   });
 });
+
+gsap.fromTo(
+  ".horisontal_line",
+  {
+    width: "0%",
+  },
+  {
+    width: "100%",
+    duration: 2,
+    ease: "power2.out",
+    scrollTrigger: {
+      trigger: ".horisontal_line",
+      start: "top 90%",
+      toggleActions: "play none none none",
+    },
+  }
+);

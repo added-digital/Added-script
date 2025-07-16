@@ -5,6 +5,9 @@ module.exports = {
   entry: {
     ["glob"]: "./src/index.js",
     ["home"]: "./src/home.js",
+    ["studio"]: "./src/studio.js",
+    ["work"]: "./src/work.js",
+    ["case"]: "./src/case.js",
   },
   output: {
     path: path.resolve(__dirname, "dist"),
