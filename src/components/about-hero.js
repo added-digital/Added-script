@@ -2,17 +2,29 @@ exports.about_hero = () => {
   const columns = document.querySelectorAll(".about-hero_col");
   if (!columns.length) return;
 
+  gsap.set(".about-hero_col", { visibility: "visible" });
+
   const timelines = [];
 
-  gsap.from(columns, {
-    opacity: 0,
-    duration: 1,
-    ease: "power2.out",
-    stagger: {
-      each: 0.1,
-      from: "random",
+  gsap.fromTo(
+    columns,
+    {
+      opacity: 0,
+      y: 100,
+      duration: 0.5,
+      ease: "expo.out",
     },
-  });
+    {
+      opacity: 1,
+      y: 0,
+      duration: 0.5,
+      stagger: {
+        each: 0.1,
+        from: "random",
+      },
+      ease: "expo.out",
+    }
+  );
 
   columns.forEach((col, i) => {
     col.innerHTML += col.innerHTML;

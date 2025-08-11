@@ -1,0 +1,1 @@
+require("./reusables/pixelAnimation").initPixelAnimation();

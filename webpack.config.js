@@ -8,6 +8,7 @@ module.exports = {
     ["studio"]: "./src/studio.js",
     ["work"]: "./src/work.js",
     ["case"]: "./src/case.js",
+    ["blog"]: "./src/blog.js",
   },
   output: {
     path: path.resolve(__dirname, "dist"),

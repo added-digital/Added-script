@@ -122,12 +122,8 @@ exports.d_animation = function () {
       display: "none",
       duration: 0,
     })
-    .to(
-      ".navbar",
-      {
-        y: 0,
-        ease: "power1.out",
-      },
-      "<"
-    );
+    .to(".navbar", {
+      y: 0,
+      ease: "power1.out",
+    });
 };

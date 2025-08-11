@@ -52,33 +52,48 @@ exports.hero = function () {
       },
       "=-0.5"
     )
-    .from(hero_text_split.lines, {
-      opacity: 0,
-      duration: 0.5,
-      ease: "power2.inOut",
-      filter: "blur(10px)",
-      stagger: 0.05,
-    })
     .from(
-      ".navbar_line",
-      {
-        width: "0%",
-        duration: 2,
-        ease: "power2.out",
-      },
-      "=-0.5"
-    )
-    .from(
-      navlinks,
+      hero_text_split.lines,
       {
         opacity: 0,
-        stagger: 0.1,
-        filter: "blur(10px)",
+        y: 20,
         duration: 1,
         ease: "power2.out",
+        filter: "blur(10px)",
+        stagger: 0.02,
       },
-      "<"
+      "=-0.5"
     );
+
+  const isFirstVisit = !sessionStorage.getItem("hasVisited");
+  const isHomePage =
+    window.location.pathname === "/" || window.location.pathname === "";
+
+  if (isFirstVisit && isHomePage) {
+    logoTl
+      .from(
+        ".navbar_line",
+        {
+          width: "0%",
+          duration: 2,
+          ease: "power2.out",
+        },
+        "=-0.5"
+      )
+      .from(
+        navlinks,
+        {
+          opacity: 0,
+          stagger: 0.1,
+          filter: "blur(10px)",
+          duration: 1,
+          ease: "power2.out",
+        },
+        "<"
+      );
+
+    sessionStorage.setItem("hasVisited", "true");
+  }
 };
 
 exports.pixel_hero = function () {
@@ -192,5 +207,6 @@ exports.pixel_hero = function () {
       ease: "power1.out",
     });
     gsap.set(".hero_video", { visibility: "visible" });
+    gsap.set(".section_hero", { visibility: "visible" });
   };
 };

@@ -12,6 +12,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   gsap.set(heroWrapper, {
     height: "100vh",
+    visibility: "visible",
   });
 
   const heroTextsplit = new SplitText(heroText, {
@@ -51,7 +52,8 @@ document.addEventListener("DOMContentLoaded", () => {
         stagger: 0.1,
         ease: "power2.out",
         duration: 1,
-      }
+      },
+      "-=0.7"
     )
     .from(
       descriptionItemLines,
