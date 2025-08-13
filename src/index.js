@@ -140,12 +140,15 @@ gsap.fromTo(
 const pageTransitionConfig = {
   "/": "",
   "/work": "light-mode",
-  "/studio": "light-mode",
-  "/blog": "",
+  "/studio": "",
+  "/blog": "light-mode",
   "/contact": "",
-  "/work/work-template": "light-mode",
-  "/blog/blog-template": "",
-  "/work/sylvera": "sylvera",
+};
+
+// Folder-based class configuration for efficiency
+const folderClassConfig = {
+  "/work": "light-mode",
+  "/blog": "light-mode",
 };
 
 // Page transition system
@@ -154,6 +157,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Set initial body class based on current page
   updateBodyClass(location.pathname);
+
+  // Initialize underline link hover animations
+  initUnderlineLinkAnimations();
 
   // Intercept all internal links
   const internalLinks = document.querySelectorAll('a[href^="/"]');
@@ -177,6 +183,35 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 });
+
+// Initialize underline link hover animations
+function initUnderlineLinkAnimations() {
+  const underlineLinks = document.querySelectorAll(".underline_link");
+
+  underlineLinks.forEach((link) => {
+    const underlineLine = link.querySelector(".underline_link-line");
+
+    if (underlineLine) {
+      // Hover in animation
+      link.addEventListener("mouseenter", () => {
+        gsap.to(underlineLine, {
+          width: "100%",
+          duration: 0.3,
+          ease: "power2.out",
+        });
+      });
+
+      // Hover out animation
+      link.addEventListener("mouseleave", () => {
+        gsap.to(underlineLine, {
+          width: "0%",
+          duration: 0.3,
+          ease: "power2.out",
+        });
+      });
+    }
+  });
+}
 
 // Handle the page transition
 function handlePageTransition(newPath) {
@@ -220,17 +255,38 @@ function updateBodyClass(path) {
     }
   });
 
-  // Add class if the path has a match and the class is not empty
-  if (pageTransitionConfig[path] && pageTransitionConfig[path] !== "") {
-    body.classList.add(pageTransitionConfig[path]);
+  // Remove all folder-based classes
+  Object.values(folderClassConfig).forEach((cls) => {
+    if (cls && cls !== "") {
+      body.classList.remove(cls);
+    }
+  });
+
+  // First check for exact path match (for specific overrides)
+  if (pageTransitionConfig[path] !== undefined) {
+    if (pageTransitionConfig[path] && pageTransitionConfig[path] !== "") {
+      body.classList.add(pageTransitionConfig[path]);
+    }
+    return; // Exit early if exact match found
   }
-  // If the path has an empty string, we explicitly remove all classes
-  else if (pageTransitionConfig[path] === "") {
-    // Remove all known classes to ensure clean state
-    Object.values(pageTransitionConfig).forEach((cls) => {
-      if (cls && cls !== "") {
-        body.classList.remove(cls);
-      }
-    });
+
+  // Check for folder-based matching
+  for (const [folderPath, className] of Object.entries(folderClassConfig)) {
+    if (path.startsWith(folderPath) && className && className !== "") {
+      body.classList.add(className);
+      return; // Exit after first match
+    }
   }
+
+  // If no matches found, ensure all classes are removed
+  Object.values(pageTransitionConfig).forEach((cls) => {
+    if (cls && cls !== "") {
+      body.classList.remove(cls);
+    }
+  });
+  Object.values(folderClassConfig).forEach((cls) => {
+    if (cls && cls !== "") {
+      body.classList.remove(cls);
+    }
+  });
 }

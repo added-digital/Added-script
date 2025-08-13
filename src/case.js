@@ -7,12 +7,15 @@ document.addEventListener("DOMContentLoaded", () => {
   const descriptionItemLines = document.querySelectorAll(
     ".horisontal_line-case"
   );
-  const heroImage = document.querySelector(".case-hero_image");
+  const heroImageReveal = document.querySelectorAll(".case_hero-reveal");
   const clientLogo = document.querySelector(".case-hero_client-logo");
 
   gsap.set(heroWrapper, {
-    height: "100vh",
     visibility: "visible",
+  });
+
+  gsap.set(heroImageReveal, {
+    width: "100%",
   });
 
   const heroTextsplit = new SplitText(heroText, {
@@ -76,22 +79,13 @@ document.addEventListener("DOMContentLoaded", () => {
       "-=1.2"
     )
     .to(
-      heroWrapper,
+      heroImageReveal,
       {
-        height: "auto",
-        duration: 2,
+        width: "0%",
+        duration: 1.2,
         ease: "power2.inOut",
       },
-      "-=1.2"
-    )
-    .from(
-      heroImage,
-      {
-        scale: 1.1,
-        duration: 2,
-        ease: "power2.out",
-      },
-      "-=2"
+      "=-1"
     )
     .set(document.body, {
       overflow: "auto",

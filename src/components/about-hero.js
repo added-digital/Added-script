@@ -6,30 +6,25 @@ exports.about_hero = () => {
 
   const timelines = [];
 
-  gsap.fromTo(
+  gsap.from(
     columns,
     {
       opacity: 0,
-      y: 100,
-      duration: 0.5,
-      ease: "expo.out",
-    },
-    {
-      opacity: 1,
-      y: 0,
-      duration: 0.5,
+      y: 50,
+      duration: 1,
       stagger: {
         each: 0.1,
         from: "random",
       },
-      ease: "expo.out",
-    }
+      ease: "power2.out",
+    },
+    "=+0.5"
   );
 
   columns.forEach((col, i) => {
     col.innerHTML += col.innerHTML;
     const originalContentHeight = col.scrollHeight / 2;
-    const speed = 20 + Math.random() * 20;
+    const speed = 20 + Math.random() * 5;
     col.parentElement.style.height = originalContentHeight + "px";
 
     // Make every other column go in the opposite direction

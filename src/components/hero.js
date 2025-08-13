@@ -28,13 +28,24 @@ exports.hero = function () {
 
   const logoTl = createLogoAnimation(tl, a, d1, d2, e, d3);
 
+  // Responsive width based on screen size
+  const getResponsiveWidth = () => {
+    if (window.innerWidth <= 768) {
+      return "25vw"; // Mobile
+    } else if (window.innerWidth <= 1024) {
+      return "15vw"; // Tablet
+    } else {
+      return "10vw"; // Desktop
+    }
+  };
+
   logoTl
     .from(logo, {
       top: "50%",
       left: "50%",
       xPercent: -50,
       yPercent: -50,
-      width: "10vw",
+      width: getResponsiveWidth(),
       duration: 1.2,
       delay: 0.5,
       ease: "power2.inOut",
@@ -90,6 +101,17 @@ exports.hero = function () {
           ease: "power2.out",
         },
         "<"
+      )
+      .from(
+        ".webflow_badge",
+        {
+          opacity: 0,
+          duration: 1,
+          x: 50,
+          filter: "blur(10px)",
+          ease: "power2.out",
+        },
+        "=-0.2"
       );
 
     sessionStorage.setItem("hasVisited", "true");
