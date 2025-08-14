@@ -9,6 +9,7 @@ document.addEventListener("DOMContentLoaded", () => {
   );
   const heroImageReveal = document.querySelectorAll(".case_hero-reveal");
   const clientLogo = document.querySelector(".case-hero_client-logo");
+  const workPills = document.querySelectorAll(".work_pill");
 
   gsap.set(heroWrapper, {
     visibility: "visible",
@@ -73,7 +74,7 @@ document.addEventListener("DOMContentLoaded", () => {
       {
         y: 50,
         duration: 1,
-        ease: "power2.inOut",
+        ease: "power2.out",
         stagger: 0.1,
       },
       "-=1.2"
@@ -83,13 +84,21 @@ document.addEventListener("DOMContentLoaded", () => {
       {
         width: "0%",
         duration: 1.2,
-        ease: "power2.inOut",
+        ease: "power2.out",
       },
       "=-1"
     )
-    .set(document.body, {
-      overflow: "auto",
-    })
+    .from(
+      workPills,
+      {
+        opacity: 0,
+        y: 20,
+        duration: 1,
+        ease: "power2.out",
+        stagger: 0.1,
+      },
+      "=-1"
+    )
     .call(() => {
       // Resume Lenis smooth scrolling after animation
       if (window.lenis) {

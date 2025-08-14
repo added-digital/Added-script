@@ -95,7 +95,7 @@ exports.d_animation = function () {
       ".section_clients",
       {
         opacity: 0,
-        duration: 1,
+        duration: 0.4,
       },
       "-=0.6"
     )
