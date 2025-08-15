@@ -59,6 +59,7 @@ document.fonts.ready.then(() => {
   });
 
   document.querySelectorAll("[data-word-reveal='true']").forEach((text) => {
+    const delay = parseFloat(text.getAttribute("delay")) || 0;
     SplitText.create(text, {
       type: "words, chars",
       wordsClass: "word",
@@ -68,7 +69,7 @@ document.fonts.ready.then(() => {
           .timeline({
             scrollTrigger: {
               trigger: text,
-              start: "top 90%",
+              start: "top 95%",
               end: "top 100%",
               toggleActions: "reverse play reverse none reset",
             },
@@ -81,6 +82,7 @@ document.fonts.ready.then(() => {
             stagger: 0.02,
             ease: "power2.out",
             duration: 1,
+            delay: delay,
           });
       },
     });
@@ -119,22 +121,28 @@ document.fonts.ready.then(() => {
   });
 });
 
-gsap.fromTo(
-  ".horisontal_line",
-  {
-    width: "0%",
-  },
-  {
-    width: "100%",
-    duration: 2,
-    ease: "power2.out",
-    scrollTrigger: {
-      trigger: ".horisontal_line",
-      start: "top 90%",
-      toggleActions: "play none none none",
+// Animate horizontal lines with dynamic delays
+document.querySelectorAll(".horisontal_line").forEach((line) => {
+  const delay = parseFloat(line.getAttribute("delay")) || 0;
+
+  gsap.fromTo(
+    line,
+    {
+      width: "0%",
     },
-  }
-);
+    {
+      width: "100%",
+      duration: 2,
+      delay: delay,
+      ease: "power2.out",
+      scrollTrigger: {
+        trigger: line,
+        start: "top 90%",
+        toggleActions: "play none none none",
+      },
+    }
+  );
+});
 
 // Page transition configuration
 const pageTransitionConfig = {
