@@ -15,9 +15,6 @@ exports.footer = function () {
     trigger: ".footer",
     start: "top 80%",
     onEnter: () => tl.play(),
-    onLeave: () => tl.reverse(),
-    onEnterBack: () => tl.play(),
-    onLeaveBack: () => tl.reverse(),
   });
 
   footerLinks.forEach((link) => {
