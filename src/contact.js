@@ -1,6 +1,3 @@
-require("./components/nav").nav();
-require("./components/footer").footer();
-
 gsap.set(".contact_hero", { visibility: "visible" });
 
 gsap.from(".contact_image", {

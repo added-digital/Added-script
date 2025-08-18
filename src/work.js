@@ -1,6 +1,3 @@
-require("./components/nav").nav();
-require("./components/footer").footer();
-
 gsap.set(".work_card", { visibility: "visible" });
 
 const workCards = document.querySelectorAll(".work_card");

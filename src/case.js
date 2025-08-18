@@ -1,5 +1,3 @@
-require("./components/nav").nav();
-
 document.addEventListener("DOMContentLoaded", () => {
   const heroWrapper = document.querySelector(".case-hero_text-wrapper");
   const heroText = document.querySelector("[data-hero-reveal]");

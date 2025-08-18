@@ -1,3 +1,6 @@
+require("./components/nav").nav();
+require("./components/footer").footer();
+
 window.lenis = new Lenis({
   lerp: 0.1,
   wheelMultiplier: 0.7,

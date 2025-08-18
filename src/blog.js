@@ -1,4 +1,3 @@
-require("./components/nav").nav();
 require("./reusables/blogCard").blogCard();
 
 window.addEventListener("DOMContentLoaded", () => {
