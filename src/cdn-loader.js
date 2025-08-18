@@ -8,9 +8,6 @@
     document.head.appendChild(script);
   }
 
-  // 1) Always load global script
-  loadScript("glob.js");
-
   // 2) Load page-specific scripts if declared
   document.querySelectorAll("script[data-cdn-script]").forEach((el) => {
     const file = el.getAttribute("data-cdn-script");
