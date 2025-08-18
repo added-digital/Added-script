@@ -10,6 +10,7 @@ module.exports = {
     ["work"]: "./src/work.js",
     ["case"]: "./src/case.js",
     ["blog"]: "./src/blog.js",
+    ["cdn-loader"]: "./src/cdn-loader.js",
   },
   output: {
     path: path.resolve(__dirname, "dist"),
