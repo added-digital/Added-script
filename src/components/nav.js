@@ -37,8 +37,11 @@ exports.nav = function () {
   const hamburgerText = document.querySelectorAll(".hamburger_link-text");
   const navLinksHamburger = document.querySelectorAll("[data-hamburger-link]");
 
-  if (hamburgerButton && navLinksWrapper && window.innerWidth <= 1024) {
+  if (hamburgerButton && navLinksWrapper && window.innerWidth <= 992) {
     let isMenuOpen = false;
+
+    // Reset any existing transforms on hamburger links
+    gsap.set(navLinksHamburger, { clearProps: "transform" });
 
     hamburgerButton.addEventListener("click", () => {
       isMenuOpen = !isMenuOpen;
@@ -56,6 +59,7 @@ exports.nav = function () {
 
         gsap.from(navLinksHamburger, {
           opacity: 0,
+          y: 20,
           duration: 0.5,
           stagger: 0.1,
           ease: "power2.out",
@@ -75,6 +79,8 @@ exports.nav = function () {
           delay: 0.2,
           onComplete: () => {
             navLinksWrapper.style.display = "none";
+            // Clear any transforms on hamburger links
+            gsap.set(navLinksHamburger, { clearProps: "transform" });
           },
         });
 
@@ -100,11 +106,13 @@ exports.nav = function () {
 
           gsap.to(navLinksWrapper, {
             opacity: 0,
+            y: 20,
             duration: 0.3,
             ease: "power2.out",
-            delay: 0.2,
             onComplete: () => {
               navLinksWrapper.style.display = "none";
+              // Clear any transforms on hamburger links
+              gsap.set(navLinksHamburger, { clearProps: "transform" });
             },
           });
 
