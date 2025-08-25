@@ -55,7 +55,6 @@ exports.nav = function () {
 
         gsap.from(navLinksHamburger, {
           opacity: 0,
-          y: 20,
           duration: 0.5,
           stagger: 0.1,
           ease: "power2.out",
