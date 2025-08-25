@@ -191,6 +191,13 @@ exports.hero = function () {
 
 exports.pixel_hero = function () {
   window.onload = () => {
+    // Skip pixel animation on mobile
+    if (window.innerWidth <= 768) {
+      gsap.set(".hero_video", { visibility: "visible" });
+      gsap.set(".section_hero", { visibility: "visible" });
+      return;
+    }
+
     const pixelOverlay = document.querySelector(".pixel-overlay");
     const cols = 10;
     const rows = 10;
