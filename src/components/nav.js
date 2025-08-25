@@ -12,7 +12,9 @@ exports.nav = function () {
       clone.classList.add("nav_link-text");
       textBlock.insertAdjacentElement("afterend", clone);
     });
+  }
 
+  if (window.innerWidth > 992) {
     navLinks.forEach((link) => {
       link.addEventListener("mouseenter", () => {
         const linkText = link.querySelectorAll(".nav_link-text");
@@ -35,7 +37,6 @@ exports.nav = function () {
   const hamburgerText = document.querySelectorAll(".hamburger_link-text");
   const navLinksHamburger = document.querySelectorAll("[data-hamburger-link]");
 
-  // Only run hamburger menu functionality on tablet and down
   if (hamburgerButton && navLinksWrapper && window.innerWidth <= 1024) {
     let isMenuOpen = false;
 
@@ -85,14 +86,11 @@ exports.nav = function () {
       }
     });
 
-    // Close menu when hamburger links are clicked
     navLinksHamburger.forEach((link) => {
       link.addEventListener("click", () => {
         if (isMenuOpen) {
-          // Trigger the close menu animation
           isMenuOpen = false;
 
-          // Fade out each link first
           gsap.to(navLinksHamburger, {
             opacity: 0,
             duration: 0.3,
@@ -100,7 +98,6 @@ exports.nav = function () {
             ease: "power2.out",
           });
 
-          // Then fade out the wrapper
           gsap.to(navLinksWrapper, {
             opacity: 0,
             duration: 0.3,
