@@ -68,22 +68,11 @@ exports.nav = function () {
           ease: "power2.out",
         });
       } else {
-        // Close menu
-        // Fade out each link first
-        gsap.to(navLinksHamburger, {
-          opacity: 0,
-          y: -20,
-          duration: 0.3,
-          stagger: 0.05,
-          ease: "power2.out",
-        });
-
-        // Then fade out the wrapper
         gsap.to(navLinksWrapper, {
           opacity: 0,
           duration: 0.3,
           ease: "power2.out",
-          delay: 0.2, // Start after links fade
+          delay: 0.2,
           onComplete: () => {
             navLinksWrapper.style.display = "none";
           },
