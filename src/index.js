@@ -1,8 +1,6 @@
 require("./components/nav").nav();
 require("./components/footer").footer();
 
-console.log("index");
-
 window.lenis = new Lenis({
   lerp: 0.1,
   wheelMultiplier: 0.7,
@@ -174,7 +172,6 @@ initUnderlineLinkAnimations();
 
 // Intercept all internal links
 const internalLinks = document.querySelectorAll('a[href^="/"]');
-console.log("Found internal links:", internalLinks.length);
 
 internalLinks.forEach((link) => {
   link.addEventListener("click", function (e) {
