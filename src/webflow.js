@@ -19,7 +19,6 @@ words.forEach((wordContainer) => {
 
   gsap.to(wordContainer.querySelectorAll("span"), {
     opacity: 1,
-    duration: 1,
     ease: "none",
     stagger: 0.05,
     scrollTrigger: {
