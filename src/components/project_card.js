@@ -7,7 +7,7 @@ exports.project_card = function () {
       gsap.from(card, {
         opacity: 0,
         y: 20,
-        duration: 0.5,
+        duration: 1,
         ease: "power2.out",
         scrollTrigger: {
           trigger: card,
