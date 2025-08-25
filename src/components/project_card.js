@@ -6,9 +6,8 @@ exports.project_card = function () {
     cards.forEach((card, index) => {
       gsap.from(card, {
         opacity: 0,
-        y: 100,
-        duration: 0.8,
-        delay: index * 0.2,
+        y: 20,
+        duration: 0.5,
         ease: "power2.out",
         scrollTrigger: {
           trigger: card,
