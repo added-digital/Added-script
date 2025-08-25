@@ -10,7 +10,6 @@ module.exports = {
     ["work"]: "./src/work.js",
     ["case"]: "./src/case.js",
     ["blog"]: "./src/blog.js",
-    ["vercel"]: "./src/vercel.json",
   },
   output: {
     path: path.resolve(__dirname, "dist"),
