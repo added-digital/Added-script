@@ -112,7 +112,7 @@ exports.hero = function () {
       ".hero-video_wrapper",
       {
         opacity: 0,
-        scale: 0.8,
+        y: 100,
         duration: 1,
         ease: "power2.out",
       },
