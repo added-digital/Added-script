@@ -1,6 +1,24 @@
 exports.project_card = function () {
-  // Skip card animations on mobile
+  // Mobile animation: animate each card when in view
   if (window.innerWidth <= 768) {
+    const cards = gsap.utils.toArray(".flip_card");
+
+    cards.forEach((card, index) => {
+      gsap.from(card, {
+        opacity: 0,
+        y: 100,
+        duration: 0.8,
+        delay: index * 0.2,
+        ease: "power2.out",
+        scrollTrigger: {
+          trigger: card,
+          start: "top 80%",
+          end: "bottom 20%",
+          toggleActions: "play none none none",
+        },
+      });
+    });
+
     return;
   }
 
