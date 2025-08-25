@@ -1,7 +1,7 @@
 require("./components/nav").nav();
 require("./components/footer").footer();
 
-console.log("index");
+console.log("index 2");
 
 window.lenis = new Lenis({
   lerp: 0.1,
