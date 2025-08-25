@@ -35,7 +35,7 @@ exports.d_animation = function () {
     .to(
       ".navbar",
       {
-        y: -100,
+        yPercent: -100,
         ease: "power1.in",
       },
       "<"
