@@ -42,43 +42,14 @@ exports.hero = function () {
   // Responsive animation configuration
   const getAnimationConfig = () => {
     if (window.innerWidth <= 768) {
-      // Mobile animations
       return {
         logo: {
-          duration: 0.8, // Faster on mobile
+          duration: 0.8,
           delay: 0.3,
           ease: "power2.inOut",
         },
-        header: {
-          y: 30, // Smaller movement
-          rotateX: -45, // Less rotation
-          stagger: 0.01, // Faster stagger
-          duration: 0.8,
-          ease: "power2.out",
-        },
-        text: {
-          y: 15, // Smaller movement
-          duration: 0.8,
-          stagger: 0.01, // Faster stagger
-          ease: "power2.out",
-        },
-        navbar: {
-          duration: 1.5, // Faster navbar animation
-          ease: "power2.out",
-        },
-        navlinks: {
-          stagger: 0.05, // Faster stagger
-          duration: 0.8,
-          ease: "power2.out",
-        },
-        badge: {
-          duration: 0.8,
-          x: 30, // Smaller movement
-          ease: "power2.out",
-        },
       };
     } else {
-      // Desktop animations (original settings)
       return {
         logo: {
           duration: 1.2,
