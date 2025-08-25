@@ -51,22 +51,14 @@ exports.nav = function () {
           ease: "power2.out",
         });
 
-        // Fade in each link with stagger
-        gsap.fromTo(
-          navLinks,
-          {
-            opacity: 0,
-            y: 20,
-          },
-          {
-            opacity: 1,
-            y: 0,
-            duration: 0.5,
-            stagger: 0.1,
-            ease: "power2.out",
-            delay: 0.2, // Start after wrapper fade
-          }
-        );
+        gsap.from(navLinks, {
+          opacity: 0,
+          y: 20,
+          duration: 0.5,
+          stagger: 0.1,
+          ease: "power2.out",
+          delay: 0.2,
+        });
 
         gsap.to(hamburgerText, {
           y: "-100%",
