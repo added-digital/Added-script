@@ -176,13 +176,10 @@ const internalLinks = document.querySelectorAll('a[href^="/"]');
 internalLinks.forEach((link) => {
   link.addEventListener("click", function (e) {
     e.preventDefault();
-    console.log("Preventing default navigation");
-
     const href = link.getAttribute("href");
 
     // Ignore links with target="_blank" or modifier keys
     if (link.target === "_blank") {
-      console.log("Ignoring link due to target or modifier keys");
       return;
     }
 
@@ -222,12 +219,9 @@ function initUnderlineLinkAnimations() {
 
 // Handle the page transition
 function handlePageTransition(newPath) {
-  console.log("Page transition triggered to:", newPath);
-
   const mainWrapper = document.querySelector(".main-wrapper");
 
   if (!mainWrapper) {
-    console.warn("Main wrapper not found, navigating directly");
     window.location.href = newPath;
     return;
   }
