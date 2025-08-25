@@ -33,6 +33,7 @@ exports.nav = function () {
   const hamburgerButton = document.querySelector(".hamburger_button");
   const navLinksWrapper = document.querySelector(".nav_links-wrapper");
   const hamburgerText = document.querySelectorAll(".hamburger_link-text");
+  const navLinksHamburger = document.querySelectorAll("[data-hamburger-link]");
 
   if (hamburgerButton && navLinksWrapper) {
     let isMenuOpen = false;
@@ -51,7 +52,7 @@ exports.nav = function () {
           ease: "power2.out",
         });
 
-        gsap.from(navLinks, {
+        gsap.from(navLinksHamburger, {
           opacity: 0,
           y: 20,
           duration: 0.5,
@@ -68,7 +69,7 @@ exports.nav = function () {
       } else {
         // Close menu
         // Fade out each link first
-        gsap.to(navLinks, {
+        gsap.to(navLinksHamburger, {
           opacity: 1,
           y: 0,
           duration: 0.3,
