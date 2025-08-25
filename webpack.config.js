@@ -10,6 +10,7 @@ module.exports = {
     ["work"]: "./src/work.js",
     ["case"]: "./src/case.js",
     ["blog"]: "./src/blog.js",
+    ["webflow"]: "./src/webflow.js",
   },
   output: {
     path: path.resolve(__dirname, "dist"),
