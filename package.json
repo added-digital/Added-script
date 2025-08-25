@@ -17,7 +17,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "webpack",
-    "dev": "webpack --watch --progress"
+    "dev": "webpack --watch --progress",
+    "build": "webpack --mode production"
   },
   "devDependencies": {
     "webpack-cli": "^6.0.1"
