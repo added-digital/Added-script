@@ -43,11 +43,31 @@ exports.nav = function () {
       if (isMenuOpen) {
         // Open menu
         navLinksWrapper.style.display = "flex";
+
+        // Fade in the wrapper first
         gsap.to(navLinksWrapper, {
           opacity: 1,
           duration: 0.3,
           ease: "power2.out",
         });
+
+        // Fade in each link with stagger
+        gsap.fromTo(
+          navLinks,
+          {
+            opacity: 0,
+            y: 20,
+          },
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.5,
+            stagger: 0.1,
+            ease: "power2.out",
+            delay: 0.2, // Start after wrapper fade
+          }
+        );
+
         gsap.to(hamburgerText, {
           y: "-100%",
           duration: 0.3,
@@ -55,14 +75,26 @@ exports.nav = function () {
         });
       } else {
         // Close menu
+        // Fade out each link first
+        gsap.to(navLinks, {
+          opacity: 0,
+          y: -20,
+          duration: 0.3,
+          stagger: 0.05,
+          ease: "power2.out",
+        });
+
+        // Then fade out the wrapper
         gsap.to(navLinksWrapper, {
           opacity: 0,
           duration: 0.3,
           ease: "power2.out",
+          delay: 0.2, // Start after links fade
           onComplete: () => {
             navLinksWrapper.style.display = "none";
           },
         });
+
         gsap.to(hamburgerText, {
           y: "0%",
           duration: 0.3,
