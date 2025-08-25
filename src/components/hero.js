@@ -118,24 +118,25 @@ exports.hero = function () {
 
   const config = getAnimationConfig();
 
-  logoTl.from(logo, {
-    top: "50%",
-    left: "50%",
-    xPercent: -50,
-    yPercent: -50,
-    width: getResponsiveWidth(),
-    duration: config.logo.duration,
-    delay: config.logo.delay,
-    ease: config.logo.ease,
-  });
-
-  // On mobile, fade out the logo after the initial animation
+  // On mobile, just fade out the logo without movement
   if (window.innerWidth <= 768) {
     logoTl.to(logo, {
       opacity: 0,
       duration: 0.5,
       ease: "power2.out",
-      delay: 0.2, // Small delay after logo animation completes
+      delay: config.logo.delay,
+    });
+  } else {
+    // On desktop/tablet, do the full movement animation
+    logoTl.from(logo, {
+      top: "50%",
+      left: "50%",
+      xPercent: -50,
+      yPercent: -50,
+      width: getResponsiveWidth(),
+      duration: config.logo.duration,
+      delay: config.logo.delay,
+      ease: config.logo.ease,
     });
   }
 
