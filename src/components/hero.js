@@ -39,6 +39,121 @@ exports.hero = function () {
     }
   };
 
+  // Responsive animation configuration
+  const getAnimationConfig = () => {
+    if (window.innerWidth <= 768) {
+      // Mobile animations
+      return {
+        logo: {
+          duration: 0.8, // Faster on mobile
+          delay: 0.3,
+          ease: "power2.inOut",
+        },
+        header: {
+          y: 30, // Smaller movement
+          rotateX: -45, // Less rotation
+          stagger: 0.01, // Faster stagger
+          duration: 0.8,
+          ease: "power2.out",
+        },
+        text: {
+          y: 15, // Smaller movement
+          duration: 0.8,
+          stagger: 0.01, // Faster stagger
+          ease: "power2.out",
+        },
+        navbar: {
+          duration: 1.5, // Faster navbar animation
+          ease: "power2.out",
+        },
+        navlinks: {
+          stagger: 0.05, // Faster stagger
+          duration: 0.8,
+          ease: "power2.out",
+        },
+        badge: {
+          duration: 0.8,
+          x: 30, // Smaller movement
+          ease: "power2.out",
+        },
+      };
+    } else if (window.innerWidth <= 1024) {
+      // Tablet animations
+      return {
+        logo: {
+          duration: 1.0,
+          delay: 0.4,
+          ease: "power2.inOut",
+        },
+        header: {
+          y: 40,
+          rotateX: -70,
+          stagger: 0.015,
+          duration: 0.9,
+          ease: "power2.out",
+        },
+        text: {
+          y: 18,
+          duration: 0.9,
+          stagger: 0.015,
+          ease: "power2.out",
+        },
+        navbar: {
+          duration: 1.8,
+          ease: "power2.out",
+        },
+        navlinks: {
+          stagger: 0.08,
+          duration: 0.9,
+          ease: "power2.out",
+        },
+        badge: {
+          duration: 0.9,
+          x: 40,
+          ease: "power2.out",
+        },
+      };
+    } else {
+      // Desktop animations (original settings)
+      return {
+        logo: {
+          duration: 1.2,
+          delay: 0.5,
+          ease: "power2.inOut",
+        },
+        header: {
+          y: 50,
+          rotateX: -90,
+          stagger: 0.02,
+          duration: 1,
+          ease: "power2.out",
+        },
+        text: {
+          y: 20,
+          duration: 1,
+          stagger: 0.02,
+          ease: "power2.out",
+        },
+        navbar: {
+          duration: 2,
+          ease: "power2.out",
+        },
+        navlinks: {
+          stagger: 0.1,
+          duration: 1,
+          ease: "power2.out",
+        },
+        badge: {
+          duration: 1,
+          x: 50,
+          ease: "power2.out",
+        },
+      };
+    }
+  };
+
+  const config = getAnimationConfig();
+
   logoTl
     .from(logo, {
       top: "50%",
@@ -46,20 +161,20 @@ exports.hero = function () {
       xPercent: -50,
       yPercent: -50,
       width: getResponsiveWidth(),
-      duration: 1.2,
-      delay: 0.5,
-      ease: "power2.inOut",
+      duration: config.logo.duration,
+      delay: config.logo.delay,
+      ease: config.logo.ease,
     })
     .from(
       hero_header_split.chars,
       {
         opacity: 0,
-        y: 50,
-        rotateX: -90,
+        y: config.header.y,
+        rotateX: config.header.rotateX,
         filter: "blur(10px)",
-        stagger: 0.02,
-        ease: "power2.out",
-        duration: 1,
+        stagger: config.header.stagger,
+        ease: config.header.ease,
+        duration: config.header.duration,
       },
       "=-0.5"
     )
@@ -67,11 +182,11 @@ exports.hero = function () {
       hero_text_split.lines,
       {
         opacity: 0,
-        y: 20,
-        duration: 1,
-        ease: "power2.out",
+        y: config.text.y,
+        duration: config.text.duration,
+        ease: config.text.ease,
         filter: "blur(10px)",
-        stagger: 0.02,
+        stagger: config.text.stagger,
       },
       "=-0.5"
     );
@@ -86,8 +201,8 @@ exports.hero = function () {
         ".navbar_line",
         {
           width: "0%",
-          duration: 2,
-          ease: "power2.out",
+          duration: config.navbar.duration,
+          ease: config.navbar.ease,
         },
         "=-0.5"
       )
@@ -95,10 +210,10 @@ exports.hero = function () {
         navlinks,
         {
           opacity: 0,
-          stagger: 0.1,
+          stagger: config.navlinks.stagger,
           filter: "blur(10px)",
-          duration: 1,
-          ease: "power2.out",
+          duration: config.navlinks.duration,
+          ease: config.navlinks.ease,
         },
         "<"
       )
@@ -106,10 +221,10 @@ exports.hero = function () {
         ".webflow_badge",
         {
           opacity: 0,
-          duration: 1,
-          x: 50,
+          duration: config.badge.duration,
+          x: config.badge.x,
           filter: "blur(10px)",
-          ease: "power2.out",
+          ease: config.badge.ease,
         },
         "=-0.2"
       );
