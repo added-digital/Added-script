@@ -236,7 +236,7 @@ function handlePageTransition(newPath) {
     onComplete: () => {
       setTimeout(() => {
         window.location.href = newPath;
-      }, 400);
+      }, 300);
     },
   });
 
