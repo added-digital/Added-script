@@ -48,6 +48,7 @@ exports.hero = function () {
           duration: 0.8, // Faster on mobile
           delay: 0.3,
           ease: "power2.inOut",
+          fadeOnly: true, // Mobile: fade out only, no movement
         },
         header: {
           y: 30, // Smaller movement
@@ -74,42 +75,6 @@ exports.hero = function () {
         badge: {
           duration: 0.8,
           x: 30, // Smaller movement
-          ease: "power2.out",
-        },
-      };
-    } else if (window.innerWidth <= 1024) {
-      // Tablet animations
-      return {
-        logo: {
-          duration: 1.0,
-          delay: 0.4,
-          ease: "power2.inOut",
-        },
-        header: {
-          y: 40,
-          rotateX: -70,
-          stagger: 0.015,
-          duration: 0.9,
-          ease: "power2.out",
-        },
-        text: {
-          y: 18,
-          duration: 0.9,
-          stagger: 0.015,
-          ease: "power2.out",
-        },
-        navbar: {
-          duration: 1.8,
-          ease: "power2.out",
-        },
-        navlinks: {
-          stagger: 0.08,
-          duration: 0.9,
-          ease: "power2.out",
-        },
-        badge: {
-          duration: 0.9,
-          x: 40,
           ease: "power2.out",
         },
       };
@@ -154,17 +119,29 @@ exports.hero = function () {
 
   const config = getAnimationConfig();
 
+  // Create logo animation based on configuration
+  const logoAnimation = config.logo.fadeOnly
+    ? {
+        // Mobile: fade out only
+        opacity: 0,
+        duration: config.logo.duration,
+        delay: config.logo.delay,
+        ease: config.logo.ease,
+      }
+    : {
+        // Desktop/Tablet: full movement animation
+        top: "50%",
+        left: "50%",
+        xPercent: -50,
+        yPercent: -50,
+        width: getResponsiveWidth(),
+        duration: config.logo.duration,
+        delay: config.logo.delay,
+        ease: config.logo.ease,
+      };
+
   logoTl
-    .from(logo, {
-      top: "50%",
-      left: "50%",
-      xPercent: -50,
-      yPercent: -50,
-      width: getResponsiveWidth(),
-      duration: config.logo.duration,
-      delay: config.logo.delay,
-      ease: config.logo.ease,
-    })
+    .from(logo, logoAnimation)
     .from(
       hero_header_split.chars,
       {
