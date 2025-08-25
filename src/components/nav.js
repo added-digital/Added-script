@@ -35,7 +35,8 @@ exports.nav = function () {
   const hamburgerText = document.querySelectorAll(".hamburger_link-text");
   const navLinksHamburger = document.querySelectorAll("[data-hamburger-link]");
 
-  if (hamburgerButton && navLinksWrapper) {
+  // Only run hamburger menu functionality on tablet and down
+  if (hamburgerButton && navLinksWrapper && window.innerWidth <= 1024) {
     let isMenuOpen = false;
 
     hamburgerButton.addEventListener("click", () => {
@@ -70,8 +71,8 @@ exports.nav = function () {
         // Close menu
         // Fade out each link first
         gsap.to(navLinksHamburger, {
-          opacity: 1,
-          y: 0,
+          opacity: 0,
+          y: -20,
           duration: 0.3,
           stagger: 0.05,
           ease: "power2.out",
@@ -94,6 +95,42 @@ exports.nav = function () {
           ease: "power2.out",
         });
       }
+    });
+
+    // Close menu when hamburger links are clicked
+    navLinksHamburger.forEach((link) => {
+      link.addEventListener("click", () => {
+        if (isMenuOpen) {
+          // Trigger the close menu animation
+          isMenuOpen = false;
+
+          // Fade out each link first
+          gsap.to(navLinksHamburger, {
+            opacity: 0,
+            y: -20,
+            duration: 0.3,
+            stagger: 0.05,
+            ease: "power2.out",
+          });
+
+          // Then fade out the wrapper
+          gsap.to(navLinksWrapper, {
+            opacity: 0,
+            duration: 0.3,
+            ease: "power2.out",
+            delay: 0.2,
+            onComplete: () => {
+              navLinksWrapper.style.display = "none";
+            },
+          });
+
+          gsap.to(hamburgerText, {
+            y: "0%",
+            duration: 0.3,
+            ease: "power2.out",
+          });
+        }
+      });
     });
   }
 };
