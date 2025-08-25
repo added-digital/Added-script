@@ -70,8 +70,8 @@ exports.nav = function () {
         // Close menu
         // Fade out each link first
         gsap.to(navLinksHamburger, {
-          opacity: 1,
-          y: 0,
+          opacity: 0,
+          y: -20,
           duration: 0.3,
           stagger: 0.05,
           ease: "power2.out",
