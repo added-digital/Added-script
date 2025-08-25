@@ -1,4 +1,9 @@
 exports.project_card = function () {
+  // Skip card animations on mobile
+  if (window.innerWidth <= 768) {
+    return;
+  }
+
   const leftTextEls = document.querySelectorAll(".side-text--left");
   const rightTextEls = document.querySelectorAll(".side-text--right");
   const textElsWrapper = document.querySelectorAll(".card_text-wrapper");
