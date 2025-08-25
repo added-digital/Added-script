@@ -106,6 +106,18 @@ exports.hero = function () {
       ease: "power2.out",
       delay: config.logo.delay,
     });
+
+    // Animate hero-video_wrapper on mobile
+    logoTl.from(
+      ".hero-video_wrapper",
+      {
+        opacity: 0,
+        scale: 0.8,
+        duration: 1,
+        ease: "power2.out",
+      },
+      "=-0.3"
+    );
   } else {
     // On desktop/tablet, do the full movement animation
     logoTl.from(logo, {
