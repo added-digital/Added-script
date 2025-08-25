@@ -44,5 +44,4 @@ exports.added_numbers = () => {
       );
     });
   }
-  console.log("added_numbers");
 };
