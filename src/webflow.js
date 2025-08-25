@@ -1,3 +1,5 @@
+require("./components/added_numbers").added_numbers();
+
 // Scrub animation for words - opacity from 50% to 100%
 const createWordScrubAnimation = () => {
   // Select all words that should be animated
