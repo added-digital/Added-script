@@ -5,3 +5,5 @@ require("./components/service").service_headline();
 require("./components/d-animation").d_animation();
 require("./reusables/blogCard").blogCard();
 require("./components/project_card").project_card();
+require("./components/nav").nav();
+require("./components/footer").footer();
