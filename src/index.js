@@ -1,6 +1,8 @@
 require("./components/nav").nav();
 require("./components/footer").footer();
 
+console.log("index");
+
 window.lenis = new Lenis({
   lerp: 0.1,
   wheelMultiplier: 0.7,
