@@ -41,49 +41,58 @@ exports.hero = function () {
 
   // Responsive animation configuration
   const getAnimationConfig = () => {
+    // Desktop values as default
+    const defaultConfig = {
+      logo: {
+        duration: 1.2,
+        delay: 0.5,
+        ease: "power2.inOut",
+      },
+      header: {
+        y: 50,
+        rotateX: -90,
+        stagger: 0.02,
+        duration: 1,
+        ease: "power2.out",
+      },
+      text: {
+        y: 20,
+        duration: 1,
+        stagger: 0.02,
+        ease: "power2.out",
+      },
+      navbar: {
+        duration: 2,
+        ease: "power2.out",
+      },
+      navlinks: {
+        stagger: 0.1,
+        duration: 1,
+        ease: "power2.out",
+      },
+      badge: {
+        duration: 1,
+        x: 50,
+        ease: "power2.out",
+      },
+    };
+
     if (window.innerWidth <= 768) {
+      // Mobile overrides - only specify what's different from desktop
       return {
+        ...defaultConfig,
         logo: {
+          ...defaultConfig.logo,
           duration: 0.8,
           delay: 0.3,
-          ease: "power2.inOut",
         },
+        // Add other mobile-specific overrides here when needed
+        // header: { ...defaultConfig.header, y: 30 },
+        // text: { ...defaultConfig.text, y: 15 },
+        // etc.
       };
     } else {
-      return {
-        logo: {
-          duration: 1.2,
-          delay: 0.5,
-          ease: "power2.inOut",
-        },
-        header: {
-          y: 50,
-          rotateX: -90,
-          stagger: 0.02,
-          duration: 1,
-          ease: "power2.out",
-        },
-        text: {
-          y: 20,
-          duration: 1,
-          stagger: 0.02,
-          ease: "power2.out",
-        },
-        navbar: {
-          duration: 2,
-          ease: "power2.out",
-        },
-        navlinks: {
-          stagger: 0.1,
-          duration: 1,
-          ease: "power2.out",
-        },
-        badge: {
-          duration: 1,
-          x: 50,
-          ease: "power2.out",
-        },
-      };
+      return defaultConfig;
     }
   };
 
