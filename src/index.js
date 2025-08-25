@@ -162,36 +162,33 @@ const folderClassConfig = {
   "/blog": "light-mode",
 };
 
-// Page transition system
-document.addEventListener("DOMContentLoaded", () => {
-  const mainWrapper = document.querySelector(".main-wrapper");
+const mainWrapper = document.querySelector(".main-wrapper");
 
-  // Set initial body class based on current page
-  updateBodyClass(location.pathname);
+// Set initial body class based on current page
+updateBodyClass(location.pathname);
 
-  // Initialize underline link hover animations
-  initUnderlineLinkAnimations();
+// Initialize underline link hover animations
+initUnderlineLinkAnimations();
 
-  // Intercept all internal links
-  const internalLinks = document.querySelectorAll('a[href^="/"]');
-  console.log("Found internal links:", internalLinks.length);
+// Intercept all internal links
+const internalLinks = document.querySelectorAll('a[href^="/"]');
+console.log("Found internal links:", internalLinks.length);
 
-  internalLinks.forEach((link) => {
-    link.addEventListener("click", function (e) {
-      e.preventDefault();
-      console.log("Preventing default navigation");
+internalLinks.forEach((link) => {
+  link.addEventListener("click", function (e) {
+    e.preventDefault();
+    console.log("Preventing default navigation");
 
-      const href = link.getAttribute("href");
+    const href = link.getAttribute("href");
 
-      // Ignore links with target="_blank" or modifier keys
-      if (link.target === "_blank") {
-        console.log("Ignoring link due to target or modifier keys");
-        return;
-      }
+    // Ignore links with target="_blank" or modifier keys
+    if (link.target === "_blank") {
+      console.log("Ignoring link due to target or modifier keys");
+      return;
+    }
 
-      // Start page transition
-      handlePageTransition(href);
-    });
+    // Start page transition
+    handlePageTransition(href);
   });
 });
 
