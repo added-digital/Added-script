@@ -30,7 +30,7 @@ exports.about_hero = () => {
     });
 
     const originalContentHeight = col.scrollHeight / 2;
-    const speed = 20 + Math.random() * 5;
+    const speed = 40 + Math.random() * 5;
     col.parentElement.style.height = originalContentHeight + "px";
 
     // Alternate direction

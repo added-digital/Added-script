@@ -1,13 +1,10 @@
 require("./components/added_numbers").added_numbers();
 
-gsap.set(".hero-section", { visibility: "visible" });
-const heroImageReveal = document.querySelector(".image_reveal");
-const heroText = document.querySelector("[hero-text]");
+gsap.set(".webflow_logo", { visibility: "visible" });
 
-gsap.from(heroImageReveal, {
-  width: "100%",
+gsap.from(".webflow_logo", {
+  opacity: 0,
   duration: 1,
-  delay: 0.2,
   ease: "power2.inOut",
 });
 
