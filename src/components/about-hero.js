@@ -22,16 +22,21 @@ exports.about_hero = () => {
   );
 
   columns.forEach((col, i) => {
-    col.innerHTML += col.innerHTML;
+    // ✅ Clone the whole content instead of rewriting innerHTML
+    const clone = col.cloneNode(true);
+    col.appendChild(clone);
+
+    // Now col has its content twice
     const originalContentHeight = col.scrollHeight / 2;
     const speed = 20 + Math.random() * 5;
     col.parentElement.style.height = originalContentHeight + "px";
 
-    // Make every other column go in the opposite direction
+    // Alternate direction
     const isReverse = i % 2 === 1;
     const startY = isReverse ? -originalContentHeight : 0;
     const endY = isReverse ? 0 : -originalContentHeight;
 
+    // ✅ Same GSAP timeline logic
     const tl = gsap.timeline({ repeat: -1, defaults: { ease: "none" } });
     tl.fromTo(
       col,
@@ -41,6 +46,7 @@ exports.about_hero = () => {
         duration: speed,
       }
     );
+
     timelines.push(tl);
   });
 
