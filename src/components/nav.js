@@ -82,9 +82,6 @@ exports.nav = function () {
             duration: 0.5,
             stagger: 0.1,
             ease: "power2.out",
-            onComplete: () => {
-              isMenuOpen = true;
-            },
           }
         );
 
@@ -109,7 +106,6 @@ exports.nav = function () {
           ease: "power2.out",
           onComplete: () => {
             navLinksWrapper.style.display = "none";
-            isMenuOpen = false;
           },
         });
 
@@ -119,6 +115,42 @@ exports.nav = function () {
           ease: "power2.out",
         });
       }
+    });
+
+    // Close menu when hamburger links are clicked
+    navLinksHamburger.forEach((link) => {
+      link.addEventListener("click", () => {
+        if (isMenuOpen) {
+          isMenuOpen = false;
+
+          // Run the same close animation as hamburger button
+          gsap.to(navLinksHamburger, {
+            opacity: 0,
+            x: -10,
+            duration: 0.3,
+            stagger: 0.05,
+            ease: "power2.in",
+          });
+
+          gsap.to(navLinksWrapper, {
+            opacity: 0,
+            duration: 1,
+            delay: 0.5,
+            ease: "power2.out",
+            onComplete: () => {
+              navLinksWrapper.style.display = "none";
+              // Clear any transforms on hamburger links
+              gsap.set(navLinksHamburger, { clearProps: "transform" });
+            },
+          });
+
+          gsap.to(hamburgerText, {
+            y: "0%",
+            duration: 0.3,
+            ease: "power2.out",
+          });
+        }
+      });
     });
   }
 };
