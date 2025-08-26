@@ -35,12 +35,10 @@ exports.about_hero = () => {
     const tl = gsap.timeline({ repeat: -1, defaults: { ease: "none" } });
     tl.fromTo(
       col,
-      { y: startY },
-      {
-        y: endY,
-        duration: speed,
-      }
+      { yPercent: isReverse ? -100 : 0 },
+      { yPercent: isReverse ? 0 : -100, duration: speed }
     );
+
     timelines.push(tl);
   });
 
