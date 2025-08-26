@@ -22,11 +22,12 @@ exports.about_hero = () => {
   );
 
   columns.forEach((col, i) => {
-    // ✅ Clone the whole content instead of rewriting innerHTML
-    const clone = col.cloneNode(true);
-    col.appendChild(clone);
+    // ✅ Duplicate children instead of using innerHTML
+    const children = Array.from(col.childNodes);
+    children.forEach((child) => {
+      col.appendChild(child.cloneNode(true));
+    });
 
-    // Now col has its content twice
     const originalContentHeight = col.scrollHeight / 2;
     const speed = 20 + Math.random() * 5;
     col.parentElement.style.height = originalContentHeight + "px";
@@ -36,7 +37,6 @@ exports.about_hero = () => {
     const startY = isReverse ? -originalContentHeight : 0;
     const endY = isReverse ? 0 : -originalContentHeight;
 
-    // ✅ Same GSAP timeline logic
     const tl = gsap.timeline({ repeat: -1, defaults: { ease: "none" } });
     tl.fromTo(
       col,
