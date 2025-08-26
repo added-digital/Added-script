@@ -22,41 +22,26 @@ exports.about_hero = () => {
   );
 
   columns.forEach((col, i) => {
-    // Clone the content once so we have double content for continuous scroll
-    const clone = col.cloneNode(true);
-    col.appendChild(clone);
-
+    col.innerHTML += col.innerHTML;
     const originalContentHeight = col.scrollHeight / 2;
     const speed = 20 + Math.random() * 5;
-
     col.parentElement.style.height = originalContentHeight + "px";
 
-    // Alternate direction
-    const direction = i % 2 === 1 ? -1 : 1;
+    // Make every other column go in the opposite direction
+    const isReverse = i % 2 === 1;
+    const startY = isReverse ? -originalContentHeight : 0;
+    const endY = isReverse ? 0 : -originalContentHeight;
 
-    gsap.to(col, {
-      y: direction * -originalContentHeight, // move one "content length"
-      duration: speed,
-      ease: "none",
-      repeat: -1,
-      modifiers: {
-        y: (y) => {
-          const current = parseFloat(y);
-
-          // Wrap properly in BOTH directions
-          if (direction === 1) {
-            return (
-              ((current + originalContentHeight) % originalContentHeight) + "px"
-            );
-          } else {
-            return (
-              ((current - originalContentHeight) % -originalContentHeight) +
-              "px"
-            );
-          }
-        },
-      },
-    });
+    const tl = gsap.timeline({ repeat: -1, defaults: { ease: "none" } });
+    tl.fromTo(
+      col,
+      { y: startY },
+      {
+        y: endY,
+        duration: speed,
+      }
+    );
+    timelines.push(tl);
   });
 
   let scrollTimeout;
