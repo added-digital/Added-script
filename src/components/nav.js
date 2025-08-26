@@ -82,6 +82,9 @@ exports.nav = function () {
             duration: 0.5,
             stagger: 0.1,
             ease: "power2.out",
+            onComplete: () => {
+              isMenuOpen = true;
+            },
           }
         );
 
@@ -106,8 +109,7 @@ exports.nav = function () {
           ease: "power2.out",
           onComplete: () => {
             navLinksWrapper.style.display = "none";
-            // Clear any transforms on hamburger links
-            gsap.set(navLinksHamburger, { clearProps: "transform" });
+            isMenuOpen = false;
           },
         });
 
