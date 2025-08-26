@@ -1,8 +1,7 @@
 exports.about_hero = () => {
   const columns = document.querySelectorAll(".about-hero_col");
   if (!columns.length) return;
-  // gsap.config({ force3D: true });
-
+  gsap.config({ force3D: true });
   gsap.set(".about-hero_col", { visibility: "visible" });
 
   const timelines = [];
@@ -36,10 +35,12 @@ exports.about_hero = () => {
     const tl = gsap.timeline({ repeat: -1, defaults: { ease: "none" } });
     tl.fromTo(
       col,
-      { yPercent: isReverse ? -100 : 0 },
-      { yPercent: isReverse ? 0 : -100, duration: speed }
+      { y: startY },
+      {
+        y: endY,
+        duration: speed,
+      }
     );
-
     timelines.push(tl);
   });
 
