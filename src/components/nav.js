@@ -58,14 +58,24 @@ exports.nav = function () {
           ease: "power2.out",
         });
 
-        gsap.from(navLinksHamburger, {
-          opacity: 0,
-          y: 20,
-          duration: 0.5,
-          stagger: 0.1,
-          ease: "power2.out",
-          delay: 0.2,
-        });
+        gsap.fromTo(
+          navLinksHamburger,
+          {
+            opacity: 0,
+            y: 20,
+            duration: 0.5,
+            stagger: 0.1,
+            ease: "power2.out",
+            delay: 0.2,
+          },
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.5,
+            stagger: 0.1,
+            ease: "power2.out",
+          }
+        );
 
         gsap.to(hamburgerText, {
           y: "-100%",
@@ -100,39 +110,5 @@ exports.nav = function () {
         });
       }
     });
-
-    // navLinksHamburger.forEach((link) => {
-    //   link.addEventListener("click", () => {
-    //     if (isMenuOpen) {
-    //       isMenuOpen = false;
-
-    //       gsap.to(navLinksHamburger, {
-    //         opacity: 0,
-    //         y: 20,
-    //         duration: 0.5,
-    //         stagger: 0.1,
-    //         ease: "power2.out",
-    //       });
-
-    //       gsap.to(navLinksWrapper, {
-    //         opacity: 0,
-    //         y: 20,
-    //         duration: 0.3,
-    //         ease: "power2.out",
-    //         onComplete: () => {
-    //           navLinksWrapper.style.display = "none";
-    //           // Clear any transforms on hamburger links
-    //           gsap.set(navLinksHamburger, { clearProps: "transform" });
-    //         },
-    //       });
-
-    //       gsap.to(hamburgerText, {
-    //         y: "0%",
-    //         duration: 0.3,
-    //         ease: "power2.out",
-    //       });
-    //     }
-    //   });
-    // });
   }
 };
