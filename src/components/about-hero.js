@@ -1,7 +1,7 @@
 exports.about_hero = () => {
   const columns = document.querySelectorAll(".about-hero_col");
   if (!columns.length) return;
-  gsap.config({ force3D: true });
+
   gsap.set(".about-hero_col", { visibility: "visible" });
 
   const timelines = [];
