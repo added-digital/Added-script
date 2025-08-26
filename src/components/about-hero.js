@@ -26,6 +26,7 @@ exports.about_hero = () => {
     const children = Array.from(col.childNodes);
     children.forEach((child) => {
       col.appendChild(child.cloneNode(true));
+      col.appendChild(child.cloneNode(true));
     });
 
     const originalContentHeight = col.scrollHeight / 2;
