@@ -52,17 +52,25 @@ exports.nav = function () {
         navLinksWrapper.style.display = "flex";
 
         // Fade in the wrapper first
-        gsap.to(navLinksWrapper, {
-          opacity: 1,
-          duration: 0.3,
-          ease: "power2.out",
-        });
+        gsap.fromTo(
+          navLinksWrapper,
+          {
+            opacity: 0,
+            duration: 0.3,
+            ease: "power2.out",
+          },
+          {
+            opacity: 1,
+            duration: 0.3,
+            ease: "power2.out",
+          }
+        );
 
         gsap.fromTo(
           navLinksHamburger,
           {
             opacity: 0,
-            y: 20,
+            x: -10,
             duration: 0.5,
             stagger: 0.1,
             ease: "power2.out",
@@ -70,7 +78,7 @@ exports.nav = function () {
           },
           {
             opacity: 1,
-            y: 0,
+            x: 0,
             duration: 0.5,
             stagger: 0.1,
             ease: "power2.out",
@@ -85,16 +93,16 @@ exports.nav = function () {
       } else {
         gsap.to(navLinksHamburger, {
           opacity: 0,
-          y: 20,
-          duration: 0.5,
-          stagger: 0.1,
-          ease: "power2.out",
+          x: -10,
+          duration: 0.3,
+          stagger: 0.05,
+          ease: "power2.in",
         });
 
         gsap.to(navLinksWrapper, {
           opacity: 0,
-          y: 20,
-          duration: 0.3,
+          duration: 1,
+          delay: 0.5,
           ease: "power2.out",
           onComplete: () => {
             navLinksWrapper.style.display = "none";
