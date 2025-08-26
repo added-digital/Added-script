@@ -1,32 +1,66 @@
 require("./components/added_numbers").added_numbers();
 
-console.log("webflow");
+gsap.set(".hero-section", { visibility: "visible" });
+const heroImageReveal = document.querySelector(".image_reveal");
+const heroText = document.querySelector("[hero-text]");
 
-const words = document.querySelectorAll("[data-scrub-words]");
+gsap.from(heroImageReveal, {
+  width: "100%",
+  duration: 1,
+  delay: 0.2,
+  ease: "power2.inOut",
+});
 
-words.forEach((wordContainer) => {
-  const text = wordContainer.textContent;
-  const wordsArray = text.split(" ");
+const workCards = document.querySelectorAll(".work_card");
 
-  wordContainer.innerHTML = "";
+// Handle individual card interactions
+workCards.forEach((card) => {
+  const workImg = card.querySelector(".work_image");
+  const button = card.querySelector(".work_button-wrapper");
 
-  wordsArray.forEach((word, index) => {
-    const wordSpan = document.createElement("span");
-    wordSpan.textContent = word + (index < wordsArray.length - 1 ? " " : "");
-    wordSpan.style.opacity = "0.5";
-    wordContainer.appendChild(wordSpan);
+  // Set initial button state
+  gsap.set(button, {
+    opacity: 0,
+    filter: "blur(10px)",
+    x: 20,
   });
 
-  gsap.to(wordContainer.querySelectorAll("span"), {
-    opacity: 1,
-    ease: "none",
-    stagger: 0.05,
-    scrollTrigger: {
-      trigger: wordContainer,
-      start: "top 80%",
-      end: "bottom 20%",
-      scrub: true,
-      toggleActions: "play none none reverse",
-    },
-  });
+  if (workImg) {
+    card.addEventListener("mouseenter", () => {
+      // Kill any existing animations on this card
+      gsap.killTweensOf(workImg);
+      gsap.killTweensOf(button);
+
+      gsap.to(workImg, {
+        scale: 1.02,
+        duration: 0.5,
+        ease: "power2.out",
+      });
+      gsap.to(button, {
+        opacity: 1,
+        x: 0,
+        filter: "blur(0px)",
+        duration: 0.5,
+        ease: "power2.out",
+      });
+    });
+
+    card.addEventListener("mouseleave", () => {
+      // Kill any existing animations on this card
+      gsap.killTweensOf(workImg);
+      gsap.killTweensOf(button);
+
+      gsap.to(workImg, {
+        scale: 1,
+        duration: 0.5,
+        ease: "power2.out",
+      });
+      gsap.to(button, {
+        opacity: 0,
+        x: 20,
+        duration: 0.5,
+        ease: "power2.out",
+      });
+    });
+  }
 });

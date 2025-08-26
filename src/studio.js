@@ -3,4 +3,3 @@ require("./components/added_numbers").added_numbers();
 require("./components/service").service_scroll();
 require("./components/service").service_headline();
 
-console.log("hej");

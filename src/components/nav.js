@@ -34,14 +34,15 @@ exports.nav = function () {
 
   const hamburgerButton = document.querySelector(".hamburger_button");
   const navLinksWrapper = document.querySelector(".nav_links-wrapper");
-  const hamburgerText = document.querySelectorAll(".hamburger_link-text");
+  const hamburgerText = document.querySelectorAll(
+    ".hamburger_link-text-action"
+  );
   const navLinksHamburger = document.querySelectorAll("[data-hamburger-link]");
 
   if (hamburgerButton && navLinksWrapper && window.innerWidth <= 992) {
     let isMenuOpen = false;
 
     // Reset any existing transforms on hamburger links
-    gsap.set(navLinksHamburger, { clearProps: "transform" });
 
     hamburgerButton.addEventListener("click", () => {
       isMenuOpen = !isMenuOpen;
@@ -72,11 +73,19 @@ exports.nav = function () {
           ease: "power2.out",
         });
       } else {
+        gsap.to(navLinksHamburger, {
+          opacity: 0,
+          y: 20,
+          duration: 0.5,
+          stagger: 0.1,
+          ease: "power2.out",
+        });
+
         gsap.to(navLinksWrapper, {
           opacity: 0,
+          y: 20,
           duration: 0.3,
           ease: "power2.out",
-          delay: 0.2,
           onComplete: () => {
             navLinksWrapper.style.display = "none";
             // Clear any transforms on hamburger links
@@ -92,37 +101,38 @@ exports.nav = function () {
       }
     });
 
-    navLinksHamburger.forEach((link) => {
-      link.addEventListener("click", () => {
-        if (isMenuOpen) {
-          isMenuOpen = false;
+    // navLinksHamburger.forEach((link) => {
+    //   link.addEventListener("click", () => {
+    //     if (isMenuOpen) {
+    //       isMenuOpen = false;
 
-          gsap.to(navLinksHamburger, {
-            opacity: 0,
-            duration: 0.3,
-            stagger: 0.05,
-            ease: "power2.out",
-          });
+    //       gsap.to(navLinksHamburger, {
+    //         opacity: 0,
+    //         y: 20,
+    //         duration: 0.5,
+    //         stagger: 0.1,
+    //         ease: "power2.out",
+    //       });
 
-          gsap.to(navLinksWrapper, {
-            opacity: 0,
-            y: 20,
-            duration: 0.3,
-            ease: "power2.out",
-            onComplete: () => {
-              navLinksWrapper.style.display = "none";
-              // Clear any transforms on hamburger links
-              gsap.set(navLinksHamburger, { clearProps: "transform" });
-            },
-          });
+    //       gsap.to(navLinksWrapper, {
+    //         opacity: 0,
+    //         y: 20,
+    //         duration: 0.3,
+    //         ease: "power2.out",
+    //         onComplete: () => {
+    //           navLinksWrapper.style.display = "none";
+    //           // Clear any transforms on hamburger links
+    //           gsap.set(navLinksHamburger, { clearProps: "transform" });
+    //         },
+    //       });
 
-          gsap.to(hamburgerText, {
-            y: "0%",
-            duration: 0.3,
-            ease: "power2.out",
-          });
-        }
-      });
-    });
+    //       gsap.to(hamburgerText, {
+    //         y: "0%",
+    //         duration: 0.3,
+    //         ease: "power2.out",
+    //       });
+    //     }
+    //   });
+    // });
   }
 };
