@@ -121,7 +121,7 @@ exports.d_animation = function () {
           document.body.className = "";
         },
       },
-      "<"
+      "-=0.4"
     )
     .set("#path", {
       display: "none",
