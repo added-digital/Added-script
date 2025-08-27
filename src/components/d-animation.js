@@ -108,7 +108,7 @@ exports.d_animation = function () {
         opacity: 0,
         duration: 0.4,
       },
-      "-=0.6"
+      isMobile ? "-=0.6" : "-=1.2"
     )
     .from(
       selected_client_header.chars,
