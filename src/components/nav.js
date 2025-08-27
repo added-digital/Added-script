@@ -46,37 +46,51 @@ exports.nav = function () {
 
     const tl = gsap.timeline({ paused: true, reversed: true });
 
-    // Build the open animation sequence
-    tl.set(navLinksWrapper, { display: "flex" }) // ensure it's visible when starting
-      .fromTo(
-        navLinksWrapper,
-        { opacity: 0 },
-        { opacity: 1, duration: 0.3, ease: "power2.out" }
-      )
-      .fromTo(
+    // Set initial state
+    gsap.set(navLinksWrapper, { display: "none", opacity: 0 });
+    gsap.set(navLinksHamburger, { opacity: 0, x: -10 });
+    gsap.set(hamburgerText, { y: "0%" });
+
+    // Open sequence
+    tl.add(() => {
+      navLinksWrapper.style.display = "flex";
+    })
+      .to(navLinksWrapper, { opacity: 1, duration: 0.3, ease: "power2.out" })
+      .to(
         navLinksHamburger,
-        { opacity: 0, x: -10 },
-        { opacity: 1, x: 0, duration: 0.5, stagger: 0.1, ease: "power2.out" },
-        "-=0.1" // slight overlap with wrapper fade
+        {
+          opacity: 1,
+          x: 0,
+          duration: 0.5,
+          stagger: 0.1,
+          ease: "power2.out",
+        },
+        "-=0.1"
       )
+      // Hamburger text LAST on open
       .to(
         hamburgerText,
         { y: "-100%", duration: 0.3, ease: "power2.out" },
-        "<"
+        "-=0.3"
       );
 
-    // Handle reversing (close)
-    tl.eventCallback("onReverseComplete", () => {
-      navLinksWrapper.style.display = "none"; // hide after close
+    // Reverse tweaks
+    tl.eventCallback("onReverseStart", () => {
+      // Run hamburger text FIRST when reversing
+      gsap.to(hamburgerText, {
+        y: "0%",
+        duration: 0.3,
+        ease: "power2.out",
+      });
     });
 
-    // Button toggle
+    tl.eventCallback("onReverseComplete", () => {
+      navLinksWrapper.style.display = "none";
+    });
+
+    // Toggle
     hamburgerButton.addEventListener("click", () => {
-      if (tl.reversed()) {
-        tl.play(); // open
-      } else {
-        tl.reverse(); // close
-      }
+      tl.reversed() ? tl.play() : tl.reverse();
     });
 
     // Close menu when hamburger links are clicked
