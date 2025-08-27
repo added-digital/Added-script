@@ -11,6 +11,7 @@ module.exports = {
     ["case"]: "./src/case.js",
     ["blog"]: "./src/blog.js",
     ["webflow"]: "./src/webflow.js",
+    ["404"]: "./src/404.js",
   },
   output: {
     path: path.resolve(__dirname, "dist"),

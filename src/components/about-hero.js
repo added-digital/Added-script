@@ -22,7 +22,6 @@ exports.about_hero = () => {
   );
 
   columns.forEach((col, i) => {
-    // ✅ Duplicate children instead of using innerHTML
     const children = Array.from(col.childNodes);
     children.forEach((child) => {
       col.appendChild(child.cloneNode(true));
@@ -33,7 +32,6 @@ exports.about_hero = () => {
     const speed = 40 + Math.random() * 5;
     col.parentElement.style.height = originalContentHeight + "px";
 
-    // Alternate direction
     const isReverse = i % 2 === 1;
     const startY = isReverse ? -originalContentHeight : 0;
     const endY = isReverse ? 0 : -originalContentHeight;
