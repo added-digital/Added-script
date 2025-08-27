@@ -112,16 +112,12 @@ exports.d_animation = function () {
       },
       "-=1.2"
     )
-    .to(
-      "body",
-      {
-        className: "light-mode",
-        onReverseComplete: function () {
-          document.body.className = "";
-        },
+    .to("body", {
+      className: "light-mode",
+      onReverseComplete: function () {
+        document.body.className = "";
       },
-      "<"
-    )
+    })
     .set("#path", {
       display: "none",
       duration: 0,
