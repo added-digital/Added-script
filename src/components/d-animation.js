@@ -106,9 +106,9 @@ exports.d_animation = function () {
       ".section_clients",
       {
         opacity: 0,
-        duration: 0.4,
+        duration: isMobile ? 0.2 : 0.4,
       },
-      isMobile ? "-=0.4" : "-=0.6"
+      isMobile ? "-=0.8" : "-=0.6"
     )
     .from(
       selected_client_header.chars,
