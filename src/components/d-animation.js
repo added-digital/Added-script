@@ -108,7 +108,7 @@ exports.d_animation = function () {
         opacity: 0,
         duration: 0.4,
       },
-      isMobile ? "-=0.2" : "-=0.6"
+      isMobile ? "-=0.4" : "-=0.6"
     )
     .from(
       selected_client_header.chars,
@@ -131,7 +131,7 @@ exports.d_animation = function () {
           document.body.className = "";
         },
       },
-      "-=0.4"
+      "<"
     )
     .set("#path", {
       display: "none",
