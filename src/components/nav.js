@@ -44,76 +44,38 @@ exports.nav = function () {
 
     // Reset any existing transforms on hamburger links
 
+    const tl = gsap.timeline({ paused: true, reversed: true });
+
+    // Build the open animation sequence
+    tl.set(navLinksWrapper, { display: "flex" }) // ensure it's visible when starting
+      .fromTo(
+        navLinksWrapper,
+        { opacity: 0 },
+        { opacity: 1, duration: 0.3, ease: "power2.out" }
+      )
+      .fromTo(
+        navLinksHamburger,
+        { opacity: 0, x: -10 },
+        { opacity: 1, x: 0, duration: 0.5, stagger: 0.1, ease: "power2.out" },
+        "-=0.1" // slight overlap with wrapper fade
+      )
+      .to(
+        hamburgerText,
+        { y: "-100%", duration: 0.3, ease: "power2.out" },
+        "-=0.3"
+      );
+
+    // Handle reversing (close)
+    tl.eventCallback("onReverseComplete", () => {
+      navLinksWrapper.style.display = "none"; // hide after close
+    });
+
+    // Button toggle
     hamburgerButton.addEventListener("click", () => {
-      isMenuOpen = !isMenuOpen;
-
-      if (isMenuOpen) {
-        // Open menu
-        navLinksWrapper.style.display = "flex";
-
-        // Fade in the wrapper first
-        gsap.fromTo(
-          navLinksWrapper,
-          {
-            opacity: 0,
-            duration: 0.3,
-            ease: "power2.out",
-          },
-          {
-            opacity: 1,
-            duration: 0.3,
-            ease: "power2.out",
-          }
-        );
-
-        gsap.fromTo(
-          navLinksHamburger,
-          {
-            opacity: 0,
-            x: -10,
-            duration: 0.5,
-            stagger: 0.1,
-            ease: "power2.out",
-            delay: 0.2,
-          },
-          {
-            opacity: 1,
-            x: 0,
-            duration: 0.5,
-            stagger: 0.1,
-            ease: "power2.out",
-          }
-        );
-
-        gsap.to(hamburgerText, {
-          y: "-100%",
-          duration: 0.3,
-          ease: "power2.out",
-        });
+      if (tl.reversed()) {
+        tl.play(); // open
       } else {
-        gsap.to(navLinksHamburger, {
-          opacity: 0,
-          x: -10,
-          duration: 0.3,
-          stagger: 0.05,
-          ease: "power2.in",
-        });
-
-        gsap.to(navLinksWrapper, {
-          opacity: 0,
-          duration: 1,
-          delay: 0.5,
-          ease: "power2.out",
-          onComplete: () => {
-            navLinksWrapper.style.display = "none";
-          },
-        });
-
-        gsap.to(hamburgerText, {
-          y: "0%",
-          duration: 0.3,
-          ease: "power2.out",
-        });
+        tl.reverse(); // close
       }
     });
 
