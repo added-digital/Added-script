@@ -82,7 +82,7 @@ exports.nav = function () {
     navLinksHamburger.forEach((link) => {
       link.addEventListener("click", () => {
         if (!tl.reversed()) {
-          tl.timeScale(2).reverse();  // just reuse the timeline
+          tl.timeScale(1.5).reverse();  // just reuse the timeline
         }
       });
     });
