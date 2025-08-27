@@ -2,7 +2,6 @@ exports.d_animation = function () {
   gsap.registerPlugin(ScrollTrigger);
 
   const columns = gsap.utils.toArray(".draw_col");
-
   const drawSvgPaths = gsap.utils.toArray("#path");
 
   const selected_client_header = SplitText.create("#selected-client-header", {
@@ -22,13 +21,25 @@ exports.d_animation = function () {
     });
   });
 
+  // Responsive configuration
+  const isMobile = window.innerWidth <= 768;
+
+  const scrollTriggerConfig = isMobile
+    ? {
+        trigger: ".section_draw-rail",
+        start: "top 60%", // Start later on mobile
+        end: "bottom 40%", // End earlier on mobile
+        scrub: 0.5, // Faster scrub on mobile
+      }
+    : {
+        trigger: ".section_draw-rail",
+        start: "top 40%",
+        end: "bottom 70%",
+        scrub: 1,
+      };
+
   const drawTl = gsap.timeline({
-    scrollTrigger: {
-      trigger: ".section_draw-rail",
-      start: "top 40%",
-      end: "bottom 70%",
-      scrub: 1,
-    },
+    scrollTrigger: scrollTriggerConfig,
   });
 
   drawTl
@@ -42,10 +53,10 @@ exports.d_animation = function () {
     )
     .from(columns, {
       opacity: 0,
-      yPercent: (index) => (index % 2 === 0 ? -100 : 100),
+      yPercent: isMobile ? 50 : (index) => (index % 2 === 0 ? -100 : 100), // Smaller movement on mobile
       ease: "power1.inOut",
       stagger: {
-        each: 0.1,
+        each: isMobile ? 0.05 : 0.1, // Faster stagger on mobile
         from: "random",
       },
     })
@@ -53,9 +64,9 @@ exports.d_animation = function () {
       drawSvgPaths,
       {
         strokeDashoffset: 0,
-        duration: 0.6,
+        duration: isMobile ? 0.4 : 0.6, // Faster on mobile
         ease: "power1.inOut",
-        stagger: 0.3,
+        stagger: isMobile ? 0.15 : 0.3, // Faster stagger on mobile
       },
       ">"
     )
@@ -89,7 +100,7 @@ exports.d_animation = function () {
       },
 
       ease: "expo.inOut",
-      duration: 1,
+      duration: isMobile ? 0.6 : 1, // Faster on mobile
     })
     .from(
       ".section_clients",
@@ -102,15 +113,15 @@ exports.d_animation = function () {
     .from(
       selected_client_header.chars,
       {
-        duration: 0.5,
+        duration: isMobile ? 0.3 : 0.5, // Faster on mobile
         opacity: 0,
-        y: 20,
-        stagger: 0.01,
-        rotateX: -90,
+        y: isMobile ? 10 : 20, // Smaller movement on mobile
+        stagger: isMobile ? 0.005 : 0.01, // Faster stagger on mobile
+        rotateX: isMobile ? -45 : -90, // Less rotation on mobile
         filter: "blur(10px)",
         ease: "power1.inOut",
       },
-      "-=1.2"
+      isMobile ? "-=0.8" : "-=1.2" // Adjust timing for mobile
     )
     .to("body", {
       className: "light-mode",
