@@ -62,7 +62,7 @@ exports.nav = function () {
       .to(
         hamburgerText,
         { y: "-100%", duration: 0.3, ease: "power2.out" },
-        "-=0.3"
+        "<"
       );
 
     // Handle reversing (close)
