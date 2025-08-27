@@ -82,26 +82,30 @@ exports.d_animation = function () {
       duration: 0.6,
       ease: "power1.inOut",
     })
-    .to(drawSvgPaths, {
-      transformOrigin: "50% 50%",
+    .to(
+      drawSvgPaths,
+      {
+        transformOrigin: "50% 50%",
 
-      scale: () => {
-        const path = drawSvgPaths[0];
-        if (!path) return 1;
+        scale: () => {
+          const path = drawSvgPaths[0];
+          if (!path) return 1;
 
-        const pathRect = path.getBoundingClientRect();
-        const viewportWidth = window.innerWidth;
-        const viewportHeight = window.innerHeight;
+          const pathRect = path.getBoundingClientRect();
+          const viewportWidth = window.innerWidth;
+          const viewportHeight = window.innerHeight;
 
-        const scaleX = viewportWidth / pathRect.width;
-        const scaleY = viewportHeight / pathRect.height;
+          const scaleX = viewportWidth / pathRect.width;
+          const scaleY = viewportHeight / pathRect.height;
 
-        return Math.max(scaleX, scaleY);
+          return Math.max(scaleX, scaleY);
+        },
+
+        ease: "expo.inOut",
+        duration: isMobile ? 0.6 : 1, // Faster on mobile
       },
-
-      ease: "expo.inOut",
-      duration: isMobile ? 0.6 : 1, // Faster on mobile
-    })
+      isMobile ? "-=0.8" : "<"
+    )
     .from(
       ".section_clients",
       {
