@@ -27,7 +27,7 @@ exports.d_animation = function () {
   const scrollTriggerConfig = isMobile
     ? {
         trigger: ".section_draw-rail",
-        start: "top 20%", // Start later on mobile
+        start: "top bottom", // Start later on mobile
         end: "bottom 50%", // End earlier on mobile
         scrub: 0.5, // Faster scrub on mobile
       }
