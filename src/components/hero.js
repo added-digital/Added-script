@@ -162,8 +162,9 @@ exports.hero = function () {
   const isFirstVisit = !sessionStorage.getItem("hasVisited");
   const isHomePage =
     window.location.pathname === "/" || window.location.pathname === "";
+  const isMobile = window.innerWidth <= 768;
 
-  if (isFirstVisit && isHomePage) {
+  if (isFirstVisit && isHomePage && !isMobile) {
     logoTl
       .from(
         ".navbar_line",
