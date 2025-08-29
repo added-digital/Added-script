@@ -11,7 +11,7 @@ exports.project_card = function () {
         ease: "power2.out",
         scrollTrigger: {
           trigger: card,
-          start: "top 20%",
+          start: "top 80%",
           end: "bottom 20%",
           toggleActions: "play none none none",
         },
