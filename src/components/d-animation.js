@@ -25,7 +25,7 @@ exports.d_animation = function () {
   const drawTl = gsap.timeline({
     scrollTrigger: {
       trigger: ".section_draw-rail",
-      start: "top 40%",
+      start: "top 10%",
       end: "bottom 70%",
       scrub: 1,
     },
