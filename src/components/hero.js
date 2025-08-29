@@ -34,6 +34,8 @@ exports.hero = function () {
       return "25vw"; // Mobile
     } else if (window.innerWidth <= 1024) {
       return "15vw"; // Tablet
+    } else if (window.innerWidth >= 1500) {
+      return "350px"; // Desktop
     } else {
       return "10vw"; // Desktop
     }
