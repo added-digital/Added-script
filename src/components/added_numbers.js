@@ -7,7 +7,7 @@ exports.added_numbers = () => {
     if (isNaN(target)) return;
 
     col.innerHTML = "";
-    for (let i = 0; i <= target; i++) {
+    for (let i = 1; i <= target; i++) {
       const div = document.createElement("div");
       div.className = "animated_number";
       div.textContent = i;
