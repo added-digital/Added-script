@@ -8,7 +8,7 @@ exports.added_numbers = () => {
 
     col.innerHTML = "";
 
-    if (target < 5) {
+    if (target === 0) {
       for (let i = 0; i <= target; i++) {
         const div = document.createElement("div");
         div.className = "animated_number";
