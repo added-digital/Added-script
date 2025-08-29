@@ -202,7 +202,7 @@ exports.hero = function () {
   }
 };
 
-exports.pixel_hero = function () {
+/*exports.pixel_hero = function () {
   window.onload = () => {
     // Skip pixel animation on mobile
     if (window.innerWidth <= 768) {
@@ -323,3 +323,4 @@ exports.pixel_hero = function () {
     gsap.set(".section_hero", { visibility: "visible" });
   };
 };
+*/
