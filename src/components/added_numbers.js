@@ -7,11 +7,21 @@ exports.added_numbers = () => {
     if (isNaN(target)) return;
 
     col.innerHTML = "";
-    for (let i = 1; i <= target; i++) {
-      const div = document.createElement("div");
-      div.className = "animated_number";
-      div.textContent = i;
-      col.appendChild(div);
+
+    if (target < 5) {
+      for (let i = 0; i <= target; i++) {
+        const div = document.createElement("div");
+        div.className = "animated_number";
+        div.textContent = i;
+        col.appendChild(div);
+      }
+    } else {
+      for (let i = 1; i <= target; i++) {
+        const div = document.createElement("div");
+        div.className = "animated_number";
+        div.textContent = i;
+        col.appendChild(div);
+      }
     }
   });
 
