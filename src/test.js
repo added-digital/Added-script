@@ -173,7 +173,6 @@ document.addEventListener("DOMContentLoaded", function () {
       "https://cdn.prod.website-files.com/686b91f995e69a47237c9a51/68a5e1b3a5aee66996350f54_sylvera-banner.png",
       "https://cdn.prod.website-files.com/686b91f995e69a47237c9a51/68a5e0b92b0adadff1616f7b_Frame%202085652808-1.svg",
       "https://cdn.prod.website-files.com/686b91f995e69a47237c9a51/68a5dfa1ca7cca58ab00055a_Frame%202085652806.png",
-      "https://cdn.prod.website-files.com/686b91f995e69a47237c9a51/68a5dfa1ca7cca58ab00055a_Frame%202085652806.png",
       "https://cdn.prod.website-files.com/686b91f995e69a47237c9a51/689da82f0e84fa0499c07d6e_sng-mobile.webp",
       "https://cdn.prod.website-files.com/686b91f995e69a47237c9a51/689ee38a6398240df4809a40_Frame%202085652806.png",
       "https://cdn.prod.website-files.com/686b91f995e69a47237c9a51/689c7f2688e0c2945c288801_Frame%202085653079.png",
