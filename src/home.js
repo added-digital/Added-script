@@ -1,5 +1,6 @@
 require("./components/hero").hero();
-require("./components/hero").pixel_hero();
+require("./components/hero_images").hero_images();
+
 require("./components/service").service_scroll();
 require("./components/service").service_headline();
 require("./components/d-animation").d_animation();
