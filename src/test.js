@@ -177,14 +177,14 @@ document.addEventListener("DOMContentLoaded", function () {
       "https://cdn.prod.website-files.com/686b91f995e69a47237c9a51/689ee38a6398240df4809a40_Frame%202085652806.png",
       "https://cdn.prod.website-files.com/686b91f995e69a47237c9a51/689c7f2688e0c2945c288801_Frame%202085653079.png",
     ],
-    popupDuration: 3, // seconds - shorter duration for cleaner look
+    popupDuration: 1, // seconds - shorter duration for cleaner look
     imageSize: 200, // size of popup images - slightly smaller for better performance
     popupDistance: 10, // distance from mouse cursor - very close to mouse for accurate following
   };
 
   let activePopups = [];
   let lastPopupPosition = null;
-  let minDistanceForPopup = 400; // minimum pixels to move before creating next popup
+  let minDistanceForPopup = 300; // minimum pixels to move before creating next popup
   let currentImageIndex = 0; // track the current image index for sequential order
 
   // Create popup image element
@@ -194,7 +194,7 @@ document.addEventListener("DOMContentLoaded", function () {
       position: fixed;
       pointer-events: none;
       z-index: 10;
-      border-radius: 8px;
+      border-radius: 4px;
       box-shadow: 0 8px 32px rgba(0,0,0,0.3);
       transform: scale(0);
       opacity: 0;
@@ -240,7 +240,6 @@ document.addEventListener("DOMContentLoaded", function () {
       scale: 0.5,
       opacity: 0,
       rotate: 10,
-      x: 50,
     });
 
     // Popup animation - make it fully visible
@@ -248,7 +247,7 @@ document.addEventListener("DOMContentLoaded", function () {
       scale: 1,
       opacity: 1,
       rotate: 0,
-      x: 0,
+      y: "-=0",
       duration: 1,
       ease: "expo.out",
     });
@@ -257,10 +256,10 @@ document.addEventListener("DOMContentLoaded", function () {
     gsap.to(img, {
       y: "+=80",
       opacity: 0,
-      scale: 0.7,
-      duration: 0.6,
+      rotate: 10,
+      duration: 1,
       delay: config.popupDuration,
-      ease: "power2.in",
+      ease: "expo.in",
       onComplete: () => {
         // Remove image and clean up
         img.remove();
