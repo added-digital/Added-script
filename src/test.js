@@ -185,7 +185,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   let activePopups = [];
   let lastPopupPosition = null;
-  let minDistanceForPopup = 200; // minimum pixels to move before creating next popup
+  let minDistanceForPopup = 400; // minimum pixels to move before creating next popup
   let currentImageIndex = 0; // track the current image index for sequential order
 
   // Create popup image element
