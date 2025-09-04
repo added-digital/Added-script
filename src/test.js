@@ -237,7 +237,7 @@ document.addEventListener("DOMContentLoaded", function () {
     img.style.top = posY + "px";
 
     gsap.set(img, {
-      scale: 0,
+      scale: 0.5,
       opacity: 0,
       rotate: 10,
       x: 50,
