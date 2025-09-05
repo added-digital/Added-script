@@ -44,7 +44,7 @@ exports.hero_images = function () {
 
   let activePopups = [];
   let lastPopupPosition = null;
-  let minDistanceForPopup = 100; // minimum pixels to move before creating next popup
+  let minDistanceForPopup = 200; // minimum pixels to move before creating next popup
   let currentImageIndex = 0; // track the current image index for sequential order
 
   // Create popup image element
