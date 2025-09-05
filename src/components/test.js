@@ -1,4 +1,7 @@
 exports.hero_images = function () {
+  if (window.innerWidth <= 992) {
+    return;
+  }
   const config = {
     imageUrls: [
       "https://cdn.prod.website-files.com/686b91f995e69a47237c9a51/68addf9ac0b85a34bcbbbf74_jk.png",
