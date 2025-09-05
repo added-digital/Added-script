@@ -177,7 +177,10 @@ exports.hero_images = function () {
     }
 
     // Check if we've moved enough distance to create a new popup
-    const currentPosition = { x: event.pageX, y: event.pageY };
+    const currentPosition = {
+      x: event.clientX - rect.left,
+      y: event.clientY - rect.top,
+    };
 
     if (lastPopupPosition === null) {
       // First popup - create it immediately
