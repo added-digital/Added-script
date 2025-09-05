@@ -102,23 +102,12 @@ exports.hero = function () {
 
   // On mobile, just fade out the logo without movement
   if (window.innerWidth <= 992) {
-    logoTl
-      .to(logo, {
-        opacity: 0,
-        duration: 0.5,
-        ease: "power2.out",
-        delay: config.logo.delay,
-      })
-      .from(
-        ".hero-section_card-flip",
-        {
-          opacity: 0,
-          y: 100,
-          duration: 1,
-          ease: "power2.out",
-        },
-        "+=1"
-      );
+    logoTl.to(logo, {
+      opacity: 0,
+      duration: 0.5,
+      ease: "power2.out",
+      delay: config.logo.delay,
+    });
 
     // Animate hero-video_wrapper on mobile
     logoTl.from(
