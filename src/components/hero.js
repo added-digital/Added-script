@@ -160,6 +160,13 @@ exports.hero = function () {
       },
       "=-0.5"
     );
+  if (window.innerWidth <= 992) {
+    logoTl.from(".section_card-flip", {
+      opacity: 0,
+      duration: 0.5,
+      ease: "power2.out",
+    });
+  }
 
   const isFirstVisit = !sessionStorage.getItem("hasVisited");
   const isHomePage =
