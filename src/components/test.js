@@ -75,6 +75,14 @@ exports.hero_images = function () {
     // Add error handling for image loading
     img.onerror = () => console.error("Failed to load image:", randomImage);
     img.onload = () => {
+      const ratio = img.naturalWidth / img.naturalHeight;
+      if (ratio > 1) {
+        img.style.maxWidth = config.widthImageSize + "px";
+        img.style.maxHeight = config.heightImageSize * 0.8 + "px";
+      } else {
+        img.style.maxWidth = config.widthImageSize * 0.8 + "px";
+        img.style.maxHeight = config.heightImageSize + "px";
+      }
       console.log("Image loaded successfully:", randomImage);
     };
 
