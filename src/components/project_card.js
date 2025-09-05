@@ -55,6 +55,12 @@ exports.project_card = function () {
         duration: 0.3,
       });
     },
+    onLeaveBack: () => {
+      gsap.to(".card_text-wrapper", {
+        opacity: 0,
+        filter: "blur(10px)",
+      });
+    },
   };
 
   const enterDuration = 1;
@@ -68,6 +74,8 @@ exports.project_card = function () {
   // 4) TIMELINE #1: cardStackTl
   // ────────────────────────────────────────────────────────
   const cardStackTl = gsap.timeline({ scrollTrigger: stConfig });
+  const textWrapperTl = gsap.timeline({ scrollTrigger: textWrapperConfig });
+  const heroOpacityTl = gsap.timeline({ scrollTrigger: heroOpacityConfig });
   // initial positions
   gsap.set(cards, {
     y: yStart,
@@ -91,6 +99,43 @@ exports.project_card = function () {
           ease: "power2.out",
         },
         label
+      )
+      // animate left and right text for this card, moving them up by 100% times i
+      .to(
+        leftTextEls[i],
+        {
+          y: `-${100 * i}%`,
+          duration: 0.2,
+          ease: "power2.out",
+        },
+        label + "+=0.3"
+      )
+      .to(
+        rightTextEls[i],
+        {
+          y: `-${100 * i}%`,
+          duration: 0.2,
+          ease: "power2.out",
+        },
+        label + "+=0.3"
+      )
+      .to(
+        rightTextEls[i - 1],
+        {
+          y: `-${100 * i + 1}%`,
+          duration: 0.2,
+          ease: "power2.out",
+        },
+        label + "+=0.3"
+      )
+      .to(
+        leftTextEls[i - 1],
+        {
+          y: `-${100 * i + 1}%`,
+          duration: 0.2,
+          ease: "power2.out",
+        },
+        label + "+=0.3"
       );
 
     // shrink & lift all the ones under it
@@ -108,6 +153,11 @@ exports.project_card = function () {
           `${label}+=0.3`
         );
       });
+      textWrapperTl.to(
+        textElsWrapper[i],
+        { opacity: 1, duration: 0.3 },
+        `${label}+=0.3`
+      );
     }
   });
 
