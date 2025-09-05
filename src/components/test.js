@@ -38,12 +38,12 @@ exports.hero_images = function () {
     ],
     popupDuration: 1, // seconds - shorter duration for cleaner look
     imageSize: 200, // size of popup images - slightly smaller for better performance
-    popupDistance: 10, // distance from mouse cursor - very close to mouse for accurate following
+    popupDistance: 10,
   };
 
   let activePopups = [];
   let lastPopupPosition = null;
-  let minDistanceForPopup = 300; // minimum pixels to move before creating next popup
+  let minDistanceForPopup = 100; // minimum pixels to move before creating next popup
   let currentImageIndex = 0; // track the current image index for sequential order
 
   // Create popup image element
