@@ -21,8 +21,6 @@ exports.project_card = function () {
     return;
   }
 
-  const leftTextEls = document.querySelectorAll(".side-text--left");
-  const rightTextEls = document.querySelectorAll(".side-text--right");
   const textElsWrapper = document.querySelectorAll(".card_text-wrapper");
 
   const sideText = [
