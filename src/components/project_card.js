@@ -43,6 +43,8 @@ exports.project_card = function () {
     },
   };
 
+  gsap.set(textElsWrapper, { opacity: 0, filter: "blur(10px)" });
+
   const textWrapperConfig = {
     trigger: ".card-flip_component",
     start: "top top",
