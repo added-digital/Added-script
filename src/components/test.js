@@ -1,8 +1,7 @@
 exports.hero_images = function () {
   const config = {
     imageUrls: [
-      "https://cdn.prod.website-files.com/686b91f995e69a47237c9a51/68b1c0d05a00d8c67b1f143a_Frame%202085652807.webp",
-      "https://cdn.prod.website-files.com/686b91f995e69a47237c9a51/68b1bb751c894092087eb825_Frame%202085652806.webp",
+      "https://cdn.prod.website-files.com/686b91f995e69a47237c9a51/68addf9ac0b85a34bcbbbf74_jk.png",
       "https://cdn.prod.website-files.com/686b91f995e69a47237c9a51/68b1c07cf89470e62c236a05_Frame%202085652806.webp",
       "https://cdn.prod.website-files.com/686b91f995e69a47237c9a51/68b1bb0397725e31b0caafb9_Frame%202085652805.webp",
       "https://cdn.prod.website-files.com/686b91f995e69a47237c9a51/68b1b9565623673658428162_Frame%202085652806.png",
