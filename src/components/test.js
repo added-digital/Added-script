@@ -37,8 +37,8 @@ exports.hero_images = function () {
       "https://cdn.prod.website-files.com/686b91f995e69a47237c9a51/689c7f2688e0c2945c288801_Frame%202085653079.png",
     ],
     popupDuration: 1, // seconds - shorter duration for cleaner look
-    heightImageSize: 200,
-    widthImageSize: 100,
+    heightImageSize: 300,
+    widthImageSize: 300,
     popupDistance: 10,
   };
 
