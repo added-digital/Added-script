@@ -72,7 +72,7 @@ exports.hero_images = function () {
     img.style.height = "auto";
 
     // Add error handling for image loading
-    img.onerror = () => console.error("Failed to load image:", randomImage);
+    img.onerror = () => console.error("Failed to load image:");
     img.onload = () => {
       const ratio = img.naturalWidth / img.naturalHeight;
       if (ratio > 1) {
@@ -82,7 +82,6 @@ exports.hero_images = function () {
         img.style.maxWidth = config.widthImageSize + "px";
         img.style.maxHeight = config.heightImageSize * 1.2 + "px";
       }
-      console.log("Image loaded successfully:", randomImage);
     };
 
     return img;
