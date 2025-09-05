@@ -30,7 +30,7 @@ exports.hero = function () {
 
   // Responsive width based on screen size
   const getResponsiveWidth = () => {
-    if (window.innerWidth <= 768) {
+    if (window.innerWidth <= 992) {
       return "25vw"; // Mobile
     } else if (window.innerWidth <= 1024) {
       return "15vw"; // Tablet
@@ -79,7 +79,7 @@ exports.hero = function () {
       },
     };
 
-    if (window.innerWidth <= 768) {
+    if (window.innerWidth <= 992) {
       // Mobile overrides - only specify what's different from desktop
       return {
         ...defaultConfig,
@@ -101,13 +101,24 @@ exports.hero = function () {
   const config = getAnimationConfig();
 
   // On mobile, just fade out the logo without movement
-  if (window.innerWidth <= 768) {
-    logoTl.to(logo, {
-      opacity: 0,
-      duration: 0.5,
-      ease: "power2.out",
-      delay: config.logo.delay,
-    });
+  if (window.innerWidth <= 992) {
+    logoTl
+      .to(logo, {
+        opacity: 0,
+        duration: 0.5,
+        ease: "power2.out",
+        delay: config.logo.delay,
+      })
+      .from(
+        ".hero-section_card-flip",
+        {
+          opacity: 0,
+          y: 100,
+          duration: 1,
+          ease: "power2.out",
+        },
+        "+=1"
+      );
 
     // Animate hero-video_wrapper on mobile
     logoTl.from(
@@ -164,7 +175,7 @@ exports.hero = function () {
   const isFirstVisit = !sessionStorage.getItem("hasVisited");
   const isHomePage =
     window.location.pathname === "/" || window.location.pathname === "";
-  const isMobile = window.innerWidth <= 768;
+  const isMobile = window.innerWidth <= 992;
 
   if (isFirstVisit && isHomePage && !isMobile) {
     logoTl
