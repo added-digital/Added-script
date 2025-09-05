@@ -170,7 +170,7 @@ exports.hero = function () {
         duration: 0.5,
         ease: "power2.out",
       },
-      "=-0.3"
+      "=-0.5"
     );
   }
 
