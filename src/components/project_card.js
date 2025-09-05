@@ -21,6 +21,25 @@ exports.project_card = function () {
     return;
   }
 
+  const leftTextEls = document.querySelectorAll(".side-text--left");
+  const rightTextEls = document.querySelectorAll(".side-text--right");
+  const textElsWrapper = document.querySelectorAll(".card_text-wrapper");
+
+  const sideText = [
+    { left: "Supernormal greens", right: "Website" },
+    { left: "Falkenklev", right: "Website" },
+    { left: "KLTK", right: "Booking system" },
+    { left: "Jord", right: "Website" },
+    { left: "Sylvera", right: "Website" },
+  ];
+
+  leftTextEls.forEach((el, i) => {
+    el.textContent = sideText[i].left;
+  });
+
+  rightTextEls.forEach((el, i) => {
+    el.textContent = sideText[i].right;
+  });
   const cards = gsap.utils.toArray(
     ".card-flip_component .flip_list .flip_card"
   );
