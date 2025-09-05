@@ -37,7 +37,8 @@ exports.hero_images = function () {
       "https://cdn.prod.website-files.com/686b91f995e69a47237c9a51/689c7f2688e0c2945c288801_Frame%202085653079.png",
     ],
     popupDuration: 1, // seconds - shorter duration for cleaner look
-    imageSize: 200, // size of popup images - slightly smaller for better performance
+    heightImageSize: 200,
+    widthImageSize: 100,
     popupDistance: 10,
   };
 
@@ -66,8 +67,8 @@ exports.hero_images = function () {
     // Move to next image (cycle back to first when reaching the end)
     currentImageIndex = (currentImageIndex + 1) % config.imageUrls.length;
     // Let images maintain their natural aspect ratio
-    img.style.maxWidth = config.imageSize + "px";
-    img.style.maxHeight = config.imageSize + "px";
+    img.style.maxWidth = config.widthImageSize + "px";
+    img.style.maxHeight = config.heightImageSize + "px";
     img.style.width = "auto";
     img.style.height = "auto";
 
@@ -88,8 +89,8 @@ exports.hero_images = function () {
 
     // Center image on mouse cursor with small random offset
     // Estimate centering based on config.imageSize (will be refined after load)
-    const posX = mouseX + offsetX - config.imageSize / 2;
-    const posY = mouseY + offsetY - config.imageSize / 2;
+    const posX = mouseX + offsetX - config.widthImageSize / 2;
+    const posY = mouseY + offsetY - config.heightImageSize / 2;
 
     // Set position directly using CSS properties to bypass any transform issues
     img.style.left = posX + "px";
