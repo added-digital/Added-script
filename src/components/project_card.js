@@ -21,6 +21,8 @@ exports.project_card = function () {
     return;
   }
 
+  const leftTextEls = document.querySelectorAll(".side-text--left");
+  const rightTextEls = document.querySelectorAll(".side-text--right");
   const textElsWrapper = document.querySelectorAll(".card_text-wrapper");
 
   const sideText = [
@@ -60,26 +62,11 @@ exports.project_card = function () {
     },
   };
 
-  gsap.set(textElsWrapper, { opacity: 0, filter: "blur(10px)" });
-
   const textWrapperConfig = {
     trigger: ".card-flip_component",
     start: "top top",
     end: "bottom bottom",
     scrub: true,
-    onEnter: () => {
-      gsap.to(".card_text-wrapper", {
-        opacity: 1,
-        filter: "blur(0px)",
-        duration: 0.3,
-      });
-    },
-    onLeaveBack: () => {
-      gsap.to(".card_text-wrapper", {
-        opacity: 0,
-        filter: "blur(10px)",
-      });
-    },
   };
 
   const enterDuration = 1;
@@ -118,43 +105,6 @@ exports.project_card = function () {
           ease: "power2.out",
         },
         label
-      )
-      // animate left and right text for this card, moving them up by 100% times i
-      .to(
-        leftTextEls[i],
-        {
-          y: `-${100 * i}%`,
-          duration: 0.2,
-          ease: "power2.out",
-        },
-        label + "+=0.3"
-      )
-      .to(
-        rightTextEls[i],
-        {
-          y: `-${100 * i}%`,
-          duration: 0.2,
-          ease: "power2.out",
-        },
-        label + "+=0.3"
-      )
-      .to(
-        rightTextEls[i - 1],
-        {
-          y: `-${100 * i + 1}%`,
-          duration: 0.2,
-          ease: "power2.out",
-        },
-        label + "+=0.3"
-      )
-      .to(
-        leftTextEls[i - 1],
-        {
-          y: `-${100 * i + 1}%`,
-          duration: 0.2,
-          ease: "power2.out",
-        },
-        label + "+=0.3"
       );
 
     // shrink & lift all the ones under it
