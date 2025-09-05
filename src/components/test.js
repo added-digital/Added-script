@@ -37,8 +37,8 @@ exports.hero_images = function () {
       "https://cdn.prod.website-files.com/686b91f995e69a47237c9a51/689c7f2688e0c2945c288801_Frame%202085653079.png",
     ],
     popupDuration: 1, // seconds - shorter duration for cleaner look
-    heightImageSize: 300,
-    widthImageSize: 300,
+    heightImageSize: 200,
+    widthImageSize: 200,
     popupDistance: 10,
   };
 
@@ -78,9 +78,9 @@ exports.hero_images = function () {
       const ratio = img.naturalWidth / img.naturalHeight;
       if (ratio > 1) {
         img.style.maxWidth = config.widthImageSize + "px";
-        img.style.maxHeight = config.heightImageSize * 0.8 + "px";
+        img.style.maxHeight = config.heightImageSize * 1 + "px";
       } else {
-        img.style.maxWidth = config.widthImageSize * 0.8 + "px";
+        img.style.maxWidth = config.widthImageSize * 1 + "px";
         img.style.maxHeight = config.heightImageSize + "px";
       }
       console.log("Image loaded successfully:", randomImage);
