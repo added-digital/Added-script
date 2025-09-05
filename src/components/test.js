@@ -149,7 +149,7 @@ exports.hero_images = function () {
   // Mouse move handler
   function handleMouseMove(event) {
     // Check if mouse is over .hero_content
-    const heroContent = document.querySelector(".hero_content");
+    const heroContent = document.querySelector(".section_hero");
     if (!heroContent) {
       // Fallback: check if we're anywhere on the page
       const isInHeroContent = true;
