@@ -21,25 +21,6 @@ exports.project_card = function () {
     return;
   }
 
-  const leftTextEls = document.querySelectorAll(".side-text--left");
-  const rightTextEls = document.querySelectorAll(".side-text--right");
-  const textElsWrapper = document.querySelectorAll(".card_text-wrapper");
-
-  const sideText = [
-    { left: "Supernormal greens", right: "Website" },
-    { left: "Falkenklev", right: "Website" },
-    { left: "KLTK", right: "Booking system" },
-    { left: "Jord", right: "Website" },
-    { left: "Sylvera", right: "Website" },
-  ];
-
-  leftTextEls.forEach((el, i) => {
-    el.textContent = sideText[i].left;
-  });
-
-  rightTextEls.forEach((el, i) => {
-    el.textContent = sideText[i].right;
-  });
   const cards = gsap.utils.toArray(
     ".card-flip_component .flip_list .flip_card"
   );
@@ -62,8 +43,6 @@ exports.project_card = function () {
     },
   };
 
-  gsap.set(textElsWrapper, { opacity: 0, filter: "blur(10px)" });
-
   const textWrapperConfig = {
     trigger: ".card-flip_component",
     start: "top top",
@@ -74,12 +53,6 @@ exports.project_card = function () {
         opacity: 1,
         filter: "blur(0px)",
         duration: 0.3,
-      });
-    },
-    onLeaveBack: () => {
-      gsap.to(".card_text-wrapper", {
-        opacity: 0,
-        filter: "blur(10px)",
       });
     },
   };
@@ -95,8 +68,6 @@ exports.project_card = function () {
   // 4) TIMELINE #1: cardStackTl
   // ────────────────────────────────────────────────────────
   const cardStackTl = gsap.timeline({ scrollTrigger: stConfig });
-  const textWrapperTl = gsap.timeline({ scrollTrigger: textWrapperConfig });
-  const heroOpacityTl = gsap.timeline({ scrollTrigger: heroOpacityConfig });
   // initial positions
   gsap.set(cards, {
     y: yStart,
@@ -120,43 +91,6 @@ exports.project_card = function () {
           ease: "power2.out",
         },
         label
-      )
-      // animate left and right text for this card, moving them up by 100% times i
-      .to(
-        leftTextEls[i],
-        {
-          y: `-${100 * i}%`,
-          duration: 0.2,
-          ease: "power2.out",
-        },
-        label + "+=0.3"
-      )
-      .to(
-        rightTextEls[i],
-        {
-          y: `-${100 * i}%`,
-          duration: 0.2,
-          ease: "power2.out",
-        },
-        label + "+=0.3"
-      )
-      .to(
-        rightTextEls[i - 1],
-        {
-          y: `-${100 * i + 1}%`,
-          duration: 0.2,
-          ease: "power2.out",
-        },
-        label + "+=0.3"
-      )
-      .to(
-        leftTextEls[i - 1],
-        {
-          y: `-${100 * i + 1}%`,
-          duration: 0.2,
-          ease: "power2.out",
-        },
-        label + "+=0.3"
       );
 
     // shrink & lift all the ones under it
@@ -174,11 +108,6 @@ exports.project_card = function () {
           `${label}+=0.3`
         );
       });
-      textWrapperTl.to(
-        textElsWrapper[i],
-        { opacity: 1, duration: 0.3 },
-        `${label}+=0.3`
-      );
     }
   });
 
