@@ -77,11 +77,11 @@ exports.hero_images = function () {
     img.onload = () => {
       const ratio = img.naturalWidth / img.naturalHeight;
       if (ratio > 1) {
-        img.style.maxWidth = config.widthImageSize + "px";
-        img.style.maxHeight = config.heightImageSize * 1 + "px";
-      } else {
-        img.style.maxWidth = config.widthImageSize * 1 + "px";
+        img.style.maxWidth = config.widthImageSize * 1.2 + "px";
         img.style.maxHeight = config.heightImageSize + "px";
+      } else {
+        img.style.maxWidth = config.widthImageSize + "px";
+        img.style.maxHeight = config.heightImageSize * 1.2 + "px";
       }
       console.log("Image loaded successfully:", randomImage);
     };
