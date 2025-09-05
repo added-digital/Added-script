@@ -158,12 +158,13 @@ exports.hero_images = function () {
   function handleMouseMove(event) {
     // Check if mouse is over .hero_content
     const heroContent = document.querySelector(".hero_content");
+    let rect = null;
     if (!heroContent) {
       // Fallback: check if we're anywhere on the page
       const isInHeroContent = true;
     } else {
       // Check if mouse is within .hero_content bounds using viewport coordinates
-      const rect = heroContent.getBoundingClientRect();
+      rect = heroContent.getBoundingClientRect();
       const isInHeroContent =
         event.clientX >= rect.left &&
         event.clientX <= rect.right &&
