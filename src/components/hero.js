@@ -160,12 +160,18 @@ exports.hero = function () {
       },
       "=-0.5"
     );
+
   if (window.innerWidth <= 992) {
-    logoTl.from(".section_card-flip", {
-      opacity: 0,
-      duration: 0.5,
-      ease: "power2.out",
-    });
+    logoTl.from(
+      ".section_card-flip",
+      {
+        opacity: 0,
+        y: 20,
+        duration: 0.5,
+        ease: "power2.out",
+      },
+      "=-0.3"
+    );
   }
 
   const isFirstVisit = !sessionStorage.getItem("hasVisited");
