@@ -7,14 +7,13 @@ exports.hero = function () {
   const d3 = document.getElementById("d3");
   const { createLogoAnimation } = require("../reusables/logo");
   const tl = gsap.timeline();
-  const cards = document.querySelectorAll(".section_card-flip");
 
   const navlinks = document.querySelectorAll(".nav_link");
 
   const hero_header = document.querySelector("[data-lines-hero='true']");
   gsap.set(hero_header, { visibility: "visible" });
 
-  gsap.set(cards, { visibility: "visible" });
+  gsap.set(".section_card-flip", { visibility: "visible" });
 
   const hero_text = document.querySelector("[data-hero-text]");
   gsap.set(hero_text, { visibility: "visible" });
