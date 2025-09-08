@@ -42,6 +42,11 @@ exports.hero_images = function () {
     "https://cdn.prod.website-files.com/686b91f995e69a47237c9a51/689da82f0e84fa0499c07d6e_sng-mobile.webp",
     "https://cdn.prod.website-files.com/686b91f995e69a47237c9a51/689ee38a6398240df4809a40_Frame%202085652806.png",
     "https://cdn.prod.website-files.com/686b91f995e69a47237c9a51/689c7f2688e0c2945c288801_Frame%202085653079.png",
+    "https://cdn.prod.website-files.com/686b91f995e69a47237c9a51/689ef3680efc4d3ce65b6994_Falkenklev.webp",
+    "https://cdn.prod.website-files.com/686b91f995e69a47237c9a51/689eee301b72c4094bb29a0e_Sylvera.avif",
+    "https://cdn.prod.website-files.com/686b91f995e69a47237c9a51/689ef1cecaa6e4cf51a6735f_Tentipi.avif",
+    "https://cdn.prod.website-files.com/686b91f995e69a47237c9a51/689f12579883837f2e7b295b_DRAKKE.png",
+    "https://cdn.prod.website-files.com/686b91f995e69a47237c9a51/689de754606102f4c9378570_KLTK.avif",
   ];
 
   const config = {
