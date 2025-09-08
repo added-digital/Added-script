@@ -14,7 +14,6 @@ exports.hero_images = function () {
 
   const originalImageUrls = [
     "https://cdn.prod.website-files.com/686b91f995e69a47237c9a51/68addf9ac0b85a34bcbbbf74_jk.png",
-    "https://cdn.prod.website-files.com/686b91f995e69a47237c9a51/68b1c07cf89470e62c236a05_Frame%202085652806.webp",
     "https://cdn.prod.website-files.com/686b91f995e69a47237c9a51/68b1bb0397725e31b0caafb9_Frame%202085652805.webp",
     "https://cdn.prod.website-files.com/686b91f995e69a47237c9a51/68b1b9e995edcb7ce5fbe30c_Frame%202085652806.png",
     "https://cdn.prod.website-files.com/686b91f995e69a47237c9a51/68b1ba3aec80b080309e8770_gt.png",
