@@ -40,7 +40,7 @@ exports.hero_images = function () {
     "https://cdn.prod.website-files.com/686b91f995e69a47237c9a51/68a5e0b92b0adadff1616f7b_Frame%202085652808-1.svg",
     "https://cdn.prod.website-files.com/686b91f995e69a47237c9a51/68a5dfa1ca7cca58ab00055a_Frame%202085652806.png",
     "https://cdn.prod.website-files.com/686b91f995e69a47237c9a51/689da82f0e84fa0499c07d6e_sng-mobile.webp",
-    "https://cdn.prod.website-files.com/686b91f995e69a47237c9a51/689ee38a6398240df4809a40_Frame%202085652806.png",
+    "https://cdn.prod.website-files.com/686b91f995e69a47237c9a51/68addc8ebcf31bc78794c786_awd.png",
     "https://cdn.prod.website-files.com/686b91f995e69a47237c9a51/689c7f2688e0c2945c288801_Frame%202085653079.png",
     "https://cdn.prod.website-files.com/686b91f995e69a47237c9a51/689ef3680efc4d3ce65b6994_Falkenklev.webp",
     "https://cdn.prod.website-files.com/686b91f995e69a47237c9a51/689eee301b72c4094bb29a0e_Sylvera.avif",
