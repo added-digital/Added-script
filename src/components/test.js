@@ -47,6 +47,7 @@ exports.hero_images = function () {
     "https://cdn.prod.website-files.com/686b91f995e69a47237c9a51/689ef1cecaa6e4cf51a6735f_Tentipi.avif",
     "https://cdn.prod.website-files.com/686b91f995e69a47237c9a51/689f12579883837f2e7b295b_DRAKKE.png",
     "https://cdn.prod.website-files.com/686b91f995e69a47237c9a51/689de754606102f4c9378570_KLTK.avif",
+    "https://cdn.prod.website-files.com/686b91f995e69a47237c9a51/68adde24c49914a5063853e2_vc.png",
   ];
 
   const config = {
