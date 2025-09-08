@@ -72,7 +72,7 @@ exports.hero_images = function () {
     img.style.height = "auto";
 
     // Add error handling for image loading
-    img.onerror = () => console.error("Failed to load image:", randomImage);
+    img.onerror = () => console.error("Failed to load image:");
     img.onload = () => {
       const ratio = img.naturalWidth / img.naturalHeight;
       if (ratio > 1) {
@@ -82,7 +82,6 @@ exports.hero_images = function () {
         img.style.maxWidth = config.widthImageSize + "px";
         img.style.maxHeight = config.heightImageSize * 1.2 + "px";
       }
-      console.log("Image loaded successfully:", randomImage);
     };
 
     return img;
@@ -158,12 +157,13 @@ exports.hero_images = function () {
   function handleMouseMove(event) {
     // Check if mouse is over .hero_content
     const heroContent = document.querySelector(".hero_content");
+    let rect = null;
     if (!heroContent) {
       // Fallback: check if we're anywhere on the page
       const isInHeroContent = true;
     } else {
       // Check if mouse is within .hero_content bounds using viewport coordinates
-      const rect = heroContent.getBoundingClientRect();
+      rect = heroContent.getBoundingClientRect();
       const isInHeroContent =
         event.clientX >= rect.left &&
         event.clientX <= rect.right &&
@@ -177,7 +177,10 @@ exports.hero_images = function () {
     }
 
     // Check if we've moved enough distance to create a new popup
-    const currentPosition = { x: event.pageX, y: event.pageY };
+    const currentPosition = {
+      x: event.clientX - rect.left,
+      y: event.clientY - rect.top,
+    };
 
     if (lastPopupPosition === null) {
       // First popup - create it immediately
