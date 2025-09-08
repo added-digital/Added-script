@@ -2,38 +2,50 @@ exports.hero_images = function () {
   if (window.innerWidth <= 992) {
     return;
   }
+  // Fisher-Yates shuffle algorithm
+  function shuffleArray(array) {
+    const shuffled = [...array]; // Create a copy to avoid mutating original
+    for (let i = shuffled.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+    }
+    return shuffled;
+  }
+
+  const originalImageUrls = [
+    "https://cdn.prod.website-files.com/686b91f995e69a47237c9a51/68addf9ac0b85a34bcbbbf74_jk.png",
+    "https://cdn.prod.website-files.com/686b91f995e69a47237c9a51/68b1c07cf89470e62c236a05_Frame%202085652806.webp",
+    "https://cdn.prod.website-files.com/686b91f995e69a47237c9a51/68b1bb0397725e31b0caafb9_Frame%202085652805.webp",
+    "https://cdn.prod.website-files.com/686b91f995e69a47237c9a51/68b1b9e995edcb7ce5fbe30c_Frame%202085652806.png",
+    "https://cdn.prod.website-files.com/686b91f995e69a47237c9a51/68b1ba3aec80b080309e8770_gt.png",
+    "https://cdn.prod.website-files.com/686b91f995e69a47237c9a51/68a5e1d85c470f8c5e5d7191_sykvera.png",
+    "https://cdn.prod.website-files.com/686b91f995e69a47237c9a51/68b1bb751c894092087eb825_Frame%202085652806.webp",
+    "https://cdn.prod.website-files.com/686b91f995e69a47237c9a51/68b1bd918111102cc3db9e55_Frame%202085653009.webp",
+    "https://cdn.prod.website-files.com/686b91f995e69a47237c9a51/68b1c07cf89470e62c236a05_Frame%202085652806.webp",
+    "https://cdn.prod.website-files.com/686b91f995e69a47237c9a51/68b1be77ead03987c7edd089_Frame%202085652806%20(1).png",
+    "https://cdn.prod.website-files.com/686b91f995e69a47237c9a51/68b1b97f0deb484edccd2aa5_ad.svg",
+    "https://cdn.prod.website-files.com/686b91f995e69a47237c9a51/68af03682513615830b20fd3_aaa.webp",
+    "https://cdn.prod.website-files.com/686b91f995e69a47237c9a51/68adde24aa0c876444378a1a_daw.png",
+    "https://cdn.prod.website-files.com/686b91f995e69a47237c9a51/68aec6d400a486851827a9c7_kl.png",
+    "https://cdn.prod.website-files.com/686b91f995e69a47237c9a51/68addf9ab54e265ba6dbff6a_dghjk.png",
+    "https://cdn.prod.website-files.com/686b91f995e69a47237c9a51/68aec581427057f509e971b3_h.png",
+    "https://cdn.prod.website-files.com/686b91f995e69a47237c9a51/68aec580525eb498a38d3808_jgg.png",
+    "https://cdn.prod.website-files.com/686b91f995e69a47237c9a51/68addf9af3dd62711e39ff17_gfa.png",
+    "https://cdn.prod.website-files.com/686b91f995e69a47237c9a51/68addbf972cf04c9de58ee92_Frame%206.svg",
+    "https://cdn.prod.website-files.com/686b91f995e69a47237c9a51/68ac9a6b6b672f730e018fc1_Frame%202085653047.png",
+    "https://cdn.prod.website-files.com/686b91f995e69a47237c9a51/68addbfa591a81fed1353360_kltkhero.png",
+    "https://cdn.prod.website-files.com/686b91f995e69a47237c9a51/68a5e1ef20c6ca5fef03dfa4_Frame%202085652807.png",
+    "https://cdn.prod.website-files.com/686b91f995e69a47237c9a51/68ac9a5e97417638476c3f8a_Frame%202085653044.png",
+    "https://cdn.prod.website-files.com/686b91f995e69a47237c9a51/68a5e1b3a5aee66996350f54_sylvera-banner.png",
+    "https://cdn.prod.website-files.com/686b91f995e69a47237c9a51/68a5e0b92b0adadff1616f7b_Frame%202085652808-1.svg",
+    "https://cdn.prod.website-files.com/686b91f995e69a47237c9a51/68a5dfa1ca7cca58ab00055a_Frame%202085652806.png",
+    "https://cdn.prod.website-files.com/686b91f995e69a47237c9a51/689da82f0e84fa0499c07d6e_sng-mobile.webp",
+    "https://cdn.prod.website-files.com/686b91f995e69a47237c9a51/689ee38a6398240df4809a40_Frame%202085652806.png",
+    "https://cdn.prod.website-files.com/686b91f995e69a47237c9a51/689c7f2688e0c2945c288801_Frame%202085653079.png",
+  ];
+
   const config = {
-    imageUrls: [
-      "https://cdn.prod.website-files.com/686b91f995e69a47237c9a51/68addf9ac0b85a34bcbbbf74_jk.png",
-      "https://cdn.prod.website-files.com/686b91f995e69a47237c9a51/68b1c07cf89470e62c236a05_Frame%202085652806.webp",
-      "https://cdn.prod.website-files.com/686b91f995e69a47237c9a51/68b1bb0397725e31b0caafb9_Frame%202085652805.webp",
-      "https://cdn.prod.website-files.com/686b91f995e69a47237c9a51/68b1b9e995edcb7ce5fbe30c_Frame%202085652806.png",
-      "https://cdn.prod.website-files.com/686b91f995e69a47237c9a51/68b1ba3aec80b080309e8770_gt.png",
-      "https://cdn.prod.website-files.com/686b91f995e69a47237c9a51/68a5e1d85c470f8c5e5d7191_sykvera.png",
-      "https://cdn.prod.website-files.com/686b91f995e69a47237c9a51/68b1bb751c894092087eb825_Frame%202085652806.webp",
-      "https://cdn.prod.website-files.com/686b91f995e69a47237c9a51/68b1bd918111102cc3db9e55_Frame%202085653009.webp",
-      "https://cdn.prod.website-files.com/686b91f995e69a47237c9a51/68b1c07cf89470e62c236a05_Frame%202085652806.webp",
-      "https://cdn.prod.website-files.com/686b91f995e69a47237c9a51/68b1be77ead03987c7edd089_Frame%202085652806%20(1).png",
-      "https://cdn.prod.website-files.com/686b91f995e69a47237c9a51/68b1b97f0deb484edccd2aa5_ad.svg",
-      "https://cdn.prod.website-files.com/686b91f995e69a47237c9a51/68af03682513615830b20fd3_aaa.webp",
-      "https://cdn.prod.website-files.com/686b91f995e69a47237c9a51/68adde24aa0c876444378a1a_daw.png",
-      "https://cdn.prod.website-files.com/686b91f995e69a47237c9a51/68aec6d400a486851827a9c7_kl.png",
-      "https://cdn.prod.website-files.com/686b91f995e69a47237c9a51/68addf9ab54e265ba6dbff6a_dghjk.png",
-      "https://cdn.prod.website-files.com/686b91f995e69a47237c9a51/68aec581427057f509e971b3_h.png",
-      "https://cdn.prod.website-files.com/686b91f995e69a47237c9a51/68aec580525eb498a38d3808_jgg.png",
-      "https://cdn.prod.website-files.com/686b91f995e69a47237c9a51/68addf9af3dd62711e39ff17_gfa.png",
-      "https://cdn.prod.website-files.com/686b91f995e69a47237c9a51/68addbf972cf04c9de58ee92_Frame%206.svg",
-      "https://cdn.prod.website-files.com/686b91f995e69a47237c9a51/68ac9a6b6b672f730e018fc1_Frame%202085653047.png",
-      "https://cdn.prod.website-files.com/686b91f995e69a47237c9a51/68addbfa591a81fed1353360_kltkhero.png",
-      "https://cdn.prod.website-files.com/686b91f995e69a47237c9a51/68a5e1ef20c6ca5fef03dfa4_Frame%202085652807.png",
-      "https://cdn.prod.website-files.com/686b91f995e69a47237c9a51/68ac9a5e97417638476c3f8a_Frame%202085653044.png",
-      "https://cdn.prod.website-files.com/686b91f995e69a47237c9a51/68a5e1b3a5aee66996350f54_sylvera-banner.png",
-      "https://cdn.prod.website-files.com/686b91f995e69a47237c9a51/68a5e0b92b0adadff1616f7b_Frame%202085652808-1.svg",
-      "https://cdn.prod.website-files.com/686b91f995e69a47237c9a51/68a5dfa1ca7cca58ab00055a_Frame%202085652806.png",
-      "https://cdn.prod.website-files.com/686b91f995e69a47237c9a51/689da82f0e84fa0499c07d6e_sng-mobile.webp",
-      "https://cdn.prod.website-files.com/686b91f995e69a47237c9a51/689ee38a6398240df4809a40_Frame%202085652806.png",
-      "https://cdn.prod.website-files.com/686b91f995e69a47237c9a51/689c7f2688e0c2945c288801_Frame%202085653079.png",
-    ],
+    imageUrls: shuffleArray(originalImageUrls), // Shuffle the array
     popupDuration: 1, // seconds - shorter duration for cleaner look
     heightImageSize: 200,
     widthImageSize: 200,
