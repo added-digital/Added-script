@@ -11,7 +11,6 @@ exports.hero_images = function () {
       "https://cdn.prod.website-files.com/686b91f995e69a47237c9a51/68b1ba3aec80b080309e8770_gt.png",
       "https://cdn.prod.website-files.com/686b91f995e69a47237c9a51/68a5e1d85c470f8c5e5d7191_sykvera.png",
       "https://cdn.prod.website-files.com/686b91f995e69a47237c9a51/68b1bb751c894092087eb825_Frame%202085652806.webp",
-      "https://cdn.prod.website-files.com/686b91f995e69a47237c9a51/68b1c0d05a00d8c67b1f143a_Frame%202085652807.webp",
       "https://cdn.prod.website-files.com/686b91f995e69a47237c9a51/68b1bd918111102cc3db9e55_Frame%202085653009.webp",
       "https://cdn.prod.website-files.com/686b91f995e69a47237c9a51/68b1c07cf89470e62c236a05_Frame%202085652806.webp",
       "https://cdn.prod.website-files.com/686b91f995e69a47237c9a51/68b1be77ead03987c7edd089_Frame%202085652806%20(1).png",
