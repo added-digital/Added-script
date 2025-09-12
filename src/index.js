@@ -153,8 +153,10 @@ document.querySelectorAll(".horisontal_line").forEach((line) => {
 const pageTransitionConfig = {
   "/": "",
   "/work": "light-mode",
+  "/sv/work": "light-mode",
   "/studio": "",
   "/blog": "light-mode",
+  "/sv/blog": "light-mode",
   "/contact": "",
 };
 
@@ -162,6 +164,8 @@ const pageTransitionConfig = {
 const folderClassConfig = {
   "/work": "light-mode",
   "/blog": "light-mode",
+  "/sv/work": "light-mode",
+  "/sv/blog": "light-mode",
 };
 
 const mainWrapper = document.querySelector(".main-wrapper");
