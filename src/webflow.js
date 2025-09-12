@@ -179,9 +179,14 @@ function createImageSwapper(containerSelector, imageArray, options = {}) {
 const imageSwapper = createImageSwapper(
   ".webflow_col-image-gallery",
   [
-    "https://cdn.prod.website-files.com/686b91f995e69a47237c9a51/68bad029f4a6239d1c0afa7c_Frame%202085652806.webp",
-    "https://cdn.prod.website-files.com/686b91f995e69a47237c9a51/68bad0de8d51f3af443797c6_Frame%202085652805.webp",
-    "https://cdn.prod.website-files.com/686b91f995e69a47237c9a51/68b1be77ead03987c7edd089_Frame%202085652806%20(1).png",
+    "https://cdn.prod.website-files.com/686b91f995e69a47237c9a51/68c42a8b6c4f7a69bfb0d6e7_Frame%202085653051.webp",
+    "https://cdn.prod.website-files.com/686b91f995e69a47237c9a51/68c42a7df6c519def21018a6_Frame%202085653050.webp",
+    "https://cdn.prod.website-files.com/686b91f995e69a47237c9a51/68c42a6a0499f53b61b4fab8_Frame%202085653049.webp",
+    "https://cdn.prod.website-files.com/686b91f995e69a47237c9a51/68c42a5b3c97809ea6824a96_Frame%202085652805.webp",
+    "https://cdn.prod.website-files.com/686b91f995e69a47237c9a51/68c42a4a7f78822f24f30d1a_Frame%202085653048.webp",
+    "https://cdn.prod.website-files.com/686b91f995e69a47237c9a51/68c42a39a1285cfa4c719f7f_Frame%202085653047.webp",
+    "https://cdn.prod.website-files.com/686b91f995e69a47237c9a51/68c42a294aa11be3f668c3b7_Frame%202085653046.webp",
+    "https://cdn.prod.website-files.com/686b91f995e69a47237c9a51/68c42a05b261eb19a33a2e26_Frame%202085652806.webp",
   ],
   {
     interval: 4000, // 4 seconds
