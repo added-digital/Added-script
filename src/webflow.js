@@ -115,27 +115,23 @@ function createImageSwapper(containerSelector, imageArray, options = {}) {
     currentIndex = (currentIndex + 1) % images.length;
     const nextImg = images[currentIndex];
 
-    // Create a timeline for overlapping transitions
-    const tl = gsap.timeline({
-      onComplete: () => {
-        isTransitioning = false;
-      },
-    });
-
-    // Fade out current image and fade in next image simultaneously
-    tl.to(currentImg, {
+    // Fade out current image
+    gsap.to(currentImg, {
       opacity: 0,
       duration: fadeOutDuration,
       ease: "power2.inOut",
-    }).to(
-      nextImg,
-      {
-        opacity: 1,
-        duration: fadeInDuration,
-        ease: "power2.inOut",
+      onComplete: () => {
+        // Fade in next image
+        gsap.to(nextImg, {
+          opacity: 1,
+          duration: fadeInDuration,
+          ease: "power2.inOut",
+          onComplete: () => {
+            isTransitioning = false;
+          },
+        });
       },
-      0
-    ); // Start at the same time (0 seconds offset)
+    });
   }
 
   function start() {
