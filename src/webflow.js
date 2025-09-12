@@ -122,14 +122,18 @@ function createImageSwapper(containerSelector, imageArray, options = {}) {
       ease: "power2.inOut",
       onComplete: () => {
         // Fade in next image
-        gsap.to(nextImg, {
-          opacity: 1,
-          duration: fadeInDuration,
-          ease: "power2.inOut",
-          onComplete: () => {
-            isTransitioning = false;
+        gsap.to(
+          nextImg,
+          {
+            opacity: 1,
+            duration: fadeInDuration,
+            ease: "power2.inOut",
+            onComplete: () => {
+              isTransitioning = false;
+            },
           },
-        });
+          "-=0.3"
+        );
       },
     });
   }
@@ -172,14 +176,16 @@ function createImageSwapper(containerSelector, imageArray, options = {}) {
   };
 }
 
-
-const imageSwapper = createImageSwapper('.webflow_col-image-gallery', [
-  "https://cdn.prod.website-files.com/686b91f995e69a47237c9a51/68bad029f4a6239d1c0afa7c_Frame%202085652806.webp",
-  "https://cdn.prod.website-files.com/686b91f995e69a47237c9a51/68bad0de8d51f3af443797c6_Frame%202085652805.webp",
-  "https://cdn.prod.website-files.com/686b91f995e69a47237c9a51/68b1be77ead03987c7edd089_Frame%202085652806%20(1).png"
-], {
-  interval: 4000, // 4 seconds
-  transitionDuration: 1.0,
-  autoStart: true
-});
-
+const imageSwapper = createImageSwapper(
+  ".webflow_col-image-gallery",
+  [
+    "https://cdn.prod.website-files.com/686b91f995e69a47237c9a51/68bad029f4a6239d1c0afa7c_Frame%202085652806.webp",
+    "https://cdn.prod.website-files.com/686b91f995e69a47237c9a51/68bad0de8d51f3af443797c6_Frame%202085652805.webp",
+    "https://cdn.prod.website-files.com/686b91f995e69a47237c9a51/68b1be77ead03987c7edd089_Frame%202085652806%20(1).png",
+  ],
+  {
+    interval: 4000, // 4 seconds
+    transitionDuration: 1.0,
+    autoStart: true,
+  }
+);
