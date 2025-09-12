@@ -44,12 +44,12 @@ exports.added_numbers = () => {
         {
           y: `-${(numbers.length - 1) * 100}%`,
           ease: "power2.inOut",
+          duration: 1,
           scrollTrigger: {
             trigger: numbers,
             start: "top 100%",
             toggleActions: "play none none reverse",
           },
-          duration: 2,
         }
       );
     });
