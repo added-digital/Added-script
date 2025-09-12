@@ -132,7 +132,7 @@ function createImageSwapper(containerSelector, imageArray, options = {}) {
               isTransitioning = false;
             },
           },
-          "-=0.3"
+          "-=0.6"
         );
       },
     });
