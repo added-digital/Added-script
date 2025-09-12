@@ -44,7 +44,7 @@ exports.added_numbers = () => {
         {
           y: `-${(numbers.length - 1) * 100}%`,
           ease: "power2.inOut",
-          duration: 1,
+          duration: 1.4,
           scrollTrigger: {
             trigger: numbers,
             start: "top 100%",
