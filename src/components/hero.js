@@ -175,48 +175,6 @@ exports.hero = function () {
       "=-0.5"
     );
   }
-
-  const isFirstVisit = !sessionStorage.getItem("hasVisited");
-  const isHomePage =
-    window.location.pathname === "/" || window.location.pathname === "";
-  const isMobile = window.innerWidth <= 992;
-
-  if (isFirstVisit && isHomePage && !isMobile) {
-    logoTl
-      .from(
-        ".navbar_line",
-        {
-          width: "0%",
-          duration: config.navbar.duration,
-          ease: config.navbar.ease,
-        },
-        "=-0.5"
-      )
-      .from(
-        navlinks,
-        {
-          opacity: 0,
-          stagger: config.navlinks.stagger,
-          filter: "blur(10px)",
-          duration: config.navlinks.duration,
-          ease: config.navlinks.ease,
-        },
-        "<"
-      )
-      .from(
-        ".webflow_badge",
-        {
-          opacity: 0,
-          duration: config.badge.duration,
-          x: config.badge.x,
-          filter: "blur(10px)",
-          ease: config.badge.ease,
-        },
-        "=-0.2"
-      );
-
-    sessionStorage.setItem("hasVisited", "true");
-  }
 };
 
 exports.pixel_hero = function () {

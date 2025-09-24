@@ -2,6 +2,7 @@ exports.hero_images = function () {
   if (window.innerWidth <= 992) {
     return;
   }
+
   // Fisher-Yates shuffle algorithm
   function shuffleArray(array) {
     const shuffled = [...array]; // Create a copy to avoid mutating original
@@ -10,6 +11,40 @@ exports.hero_images = function () {
       [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
     }
     return shuffled;
+  }
+
+  // Pre-fetch images function
+  function prefetchImages(imageUrls, onProgress = null) {
+    let loadedCount = 0;
+    const totalImages = imageUrls.length;
+
+    return Promise.all(
+      imageUrls.map((url) => {
+        return new Promise((resolve, reject) => {
+          const img = new Image();
+
+          img.onload = () => {
+            loadedCount++;
+            if (onProgress) {
+              onProgress(loadedCount, totalImages);
+            }
+            resolve(img);
+          };
+
+          img.onerror = () => {
+            console.warn(`Failed to pre-fetch image: ${url}`);
+            loadedCount++;
+            if (onProgress) {
+              onProgress(loadedCount, totalImages);
+            }
+            resolve(null); // Resolve with null instead of rejecting to continue with other images
+          };
+
+          // Start loading the image
+          img.src = url;
+        });
+      })
+    );
   }
 
   const originalImageUrls = [
@@ -61,6 +96,7 @@ exports.hero_images = function () {
   let lastPopupPosition = null;
   let minDistanceForPopup = 300; // minimum pixels to move before creating next popup
   let currentImageIndex = 0; // track the current image index for sequential order
+  let imagesPrefetched = false; // track if images have been pre-fetched
 
   // Create popup image element
   function createPopupImage() {
@@ -88,7 +124,7 @@ exports.hero_images = function () {
     img.style.height = "auto";
 
     // Add error handling for image loading
-    img.onerror = () => console.error("Failed to load image:");
+    img.onerror = () => console.error("Failed to load image:", imageUrl);
     img.onload = () => {
       const ratio = img.naturalWidth / img.naturalHeight;
       if (ratio > 1) {
@@ -226,4 +262,18 @@ exports.hero_images = function () {
   }
   // Clean up on page unload
   window.addEventListener("beforeunload", cleanup);
+
+  // Initialize pre-fetching of images
+  console.log("Starting to pre-fetch hero images...");
+  prefetchImages(config.imageUrls, (loaded, total) => {
+    const percentage = Math.round((loaded / total) * 100);
+    console.log(`Pre-fetching progress: ${loaded}/${total} (${percentage}%)`);
+
+    if (loaded === total) {
+      imagesPrefetched = true;
+      console.log("All hero images pre-fetched successfully!");
+    }
+  }).catch((error) => {
+    console.error("Error during image pre-fetching:", error);
+  });
 };
