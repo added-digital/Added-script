@@ -1,180 +1,182 @@
 exports.hero = function () {
-  const logo = document.getElementById("logo");
-  const a = document.getElementById("a");
-  const d1 = document.getElementById("d1");
-  const d2 = document.getElementById("d2");
-  const e = document.getElementById("e");
-  const d3 = document.getElementById("d3");
-  const { createLogoAnimation } = require("../reusables/logo");
-  const tl = gsap.timeline();
+  document.onload = () => {
+    const logo = document.getElementById("logo");
+    const a = document.getElementById("a");
+    const d1 = document.getElementById("d1");
+    const d2 = document.getElementById("d2");
+    const e = document.getElementById("e");
+    const d3 = document.getElementById("d3");
+    const { createLogoAnimation } = require("../reusables/logo");
+    const tl = gsap.timeline();
 
-  const navlinks = document.querySelectorAll(".nav_link");
+    const navlinks = document.querySelectorAll(".nav_link");
 
-  const hero_header = document.querySelector("[data-lines-hero='true']");
-  gsap.set(hero_header, { visibility: "visible" });
+    const hero_header = document.querySelector("[data-lines-hero='true']");
+    gsap.set(hero_header, { visibility: "visible" });
 
-  gsap.set(".section_card-flip", { visibility: "visible" });
+    gsap.set(".section_card-flip", { visibility: "visible" });
 
-  const hero_text = document.querySelector("[data-hero-text]");
-  gsap.set(hero_text, { visibility: "visible" });
+    const hero_text = document.querySelector("[data-hero-text]");
+    gsap.set(hero_text, { visibility: "visible" });
 
-  const hero_text_split = SplitText.create(hero_text, {
-    type: "lines",
-    linesClass: "line",
-  });
+    const hero_text_split = SplitText.create(hero_text, {
+      type: "lines",
+      linesClass: "line",
+    });
 
-  const hero_header_split = SplitText.create(hero_header, {
-    type: "chars, words",
-    linesClass: "line",
-  });
+    const hero_header_split = SplitText.create(hero_header, {
+      type: "chars, words",
+      linesClass: "line",
+    });
 
-  const logoTl = createLogoAnimation(tl, a, d1, d2, e, d3);
+    const logoTl = createLogoAnimation(tl, a, d1, d2, e, d3);
 
-  // Responsive width based on screen size
-  const getResponsiveWidth = () => {
-    if (window.innerWidth <= 992) {
-      return "25vw"; // Mobile
-    } else if (window.innerWidth <= 1024) {
-      return "15vw"; // Tablet
-    } else if (window.innerWidth >= 1800) {
-      return "250px"; // Desktop
-    } else {
-      return "10vw"; // Desktop
-    }
-  };
-
-  // Responsive animation configuration
-  const getAnimationConfig = () => {
-    // Desktop values as default
-    const defaultConfig = {
-      logo: {
-        duration: 1.2,
-        delay: 0.5,
-        ease: "power2.inOut",
-      },
-      header: {
-        y: 50,
-        rotateX: -90,
-        stagger: 0.02,
-        duration: 1,
-        ease: "power2.out",
-      },
-      text: {
-        y: 20,
-        duration: 1,
-        stagger: 0.02,
-        ease: "power2.out",
-      },
-      navbar: {
-        duration: 2,
-        ease: "power2.out",
-      },
-      navlinks: {
-        stagger: 0.1,
-        duration: 1,
-        ease: "power2.out",
-      },
-      badge: {
-        duration: 1,
-        x: 50,
-        ease: "power2.out",
-      },
+    // Responsive width based on screen size
+    const getResponsiveWidth = () => {
+      if (window.innerWidth <= 992) {
+        return "25vw"; // Mobile
+      } else if (window.innerWidth <= 1024) {
+        return "15vw"; // Tablet
+      } else if (window.innerWidth >= 1800) {
+        return "250px"; // Desktop
+      } else {
+        return "10vw"; // Desktop
+      }
     };
 
-    if (window.innerWidth <= 992) {
-      // Mobile overrides - only specify what's different from desktop
-      return {
-        ...defaultConfig,
+    // Responsive animation configuration
+    const getAnimationConfig = () => {
+      // Desktop values as default
+      const defaultConfig = {
         logo: {
-          ...defaultConfig.logo,
-          duration: 0.8,
-          delay: 0.3,
+          duration: 1.2,
+          delay: 0.5,
+          ease: "power2.inOut",
         },
-        // Add other mobile-specific overrides here when needed
-        // header: { ...defaultConfig.header, y: 30 },
-        // text: { ...defaultConfig.text, y: 15 },
-        // etc.
+        header: {
+          y: 50,
+          rotateX: -90,
+          stagger: 0.02,
+          duration: 1,
+          ease: "power2.out",
+        },
+        text: {
+          y: 20,
+          duration: 1,
+          stagger: 0.02,
+          ease: "power2.out",
+        },
+        navbar: {
+          duration: 2,
+          ease: "power2.out",
+        },
+        navlinks: {
+          stagger: 0.1,
+          duration: 1,
+          ease: "power2.out",
+        },
+        badge: {
+          duration: 1,
+          x: 50,
+          ease: "power2.out",
+        },
       };
-    } else {
-      return defaultConfig;
-    }
-  };
 
-  const config = getAnimationConfig();
+      if (window.innerWidth <= 992) {
+        // Mobile overrides - only specify what's different from desktop
+        return {
+          ...defaultConfig,
+          logo: {
+            ...defaultConfig.logo,
+            duration: 0.8,
+            delay: 0.3,
+          },
+          // Add other mobile-specific overrides here when needed
+          // header: { ...defaultConfig.header, y: 30 },
+          // text: { ...defaultConfig.text, y: 15 },
+          // etc.
+        };
+      } else {
+        return defaultConfig;
+      }
+    };
 
-  // On mobile, just fade out the logo without movement
-  if (window.innerWidth <= 992) {
-    logoTl.to(logo, {
-      opacity: 0,
-      duration: 0.5,
-      ease: "power2.out",
-      delay: config.logo.delay,
-    });
+    const config = getAnimationConfig();
 
-    // Animate hero-video_wrapper on mobile
-    logoTl.from(
-      ".hero-video_wrapper",
-      {
+    // On mobile, just fade out the logo without movement
+    if (window.innerWidth <= 992) {
+      logoTl.to(logo, {
         opacity: 0,
-        y: 100,
-        duration: 1,
-        ease: "power2.out",
-      },
-      "=-0.3"
-    );
-  } else {
-    // On desktop/tablet, do the full movement animation
-    logoTl.from(logo, {
-      top: "50%",
-      left: "50%",
-      xPercent: -50,
-      yPercent: -50,
-      width: getResponsiveWidth(),
-      duration: config.logo.duration,
-      delay: config.logo.delay,
-      ease: config.logo.ease,
-    });
-  }
-
-  logoTl
-    .from(
-      hero_header_split.chars,
-      {
-        opacity: 0,
-        y: config.header.y,
-        rotateX: config.header.rotateX,
-        filter: "blur(10px)",
-        stagger: config.header.stagger,
-        ease: config.header.ease,
-        duration: config.header.duration,
-      },
-      "=-0.5"
-    )
-    .from(
-      hero_text_split.lines,
-      {
-        opacity: 0,
-        y: config.text.y,
-        duration: config.text.duration,
-        ease: config.text.ease,
-        filter: "blur(10px)",
-        stagger: config.text.stagger,
-      },
-      "=-0.5"
-    );
-
-  if (window.innerWidth <= 992) {
-    logoTl.from(
-      ".section_card-flip",
-      {
-        opacity: 0,
-        y: 20,
         duration: 0.5,
         ease: "power2.out",
-      },
-      "=-0.5"
-    );
-  }
+        delay: config.logo.delay,
+      });
+
+      // Animate hero-video_wrapper on mobile
+      logoTl.from(
+        ".hero-video_wrapper",
+        {
+          opacity: 0,
+          y: 100,
+          duration: 1,
+          ease: "power2.out",
+        },
+        "=-0.3"
+      );
+    } else {
+      // On desktop/tablet, do the full movement animation
+      logoTl.from(logo, {
+        top: "50%",
+        left: "50%",
+        xPercent: -50,
+        yPercent: -50,
+        width: getResponsiveWidth(),
+        duration: config.logo.duration,
+        delay: config.logo.delay,
+        ease: config.logo.ease,
+      });
+    }
+
+    logoTl
+      .from(
+        hero_header_split.chars,
+        {
+          opacity: 0,
+          y: config.header.y,
+          rotateX: config.header.rotateX,
+          filter: "blur(10px)",
+          stagger: config.header.stagger,
+          ease: config.header.ease,
+          duration: config.header.duration,
+        },
+        "=-0.5"
+      )
+      .from(
+        hero_text_split.lines,
+        {
+          opacity: 0,
+          y: config.text.y,
+          duration: config.text.duration,
+          ease: config.text.ease,
+          filter: "blur(10px)",
+          stagger: config.text.stagger,
+        },
+        "=-0.5"
+      );
+
+    if (window.innerWidth <= 992) {
+      logoTl.from(
+        ".section_card-flip",
+        {
+          opacity: 0,
+          y: 20,
+          duration: 0.5,
+          ease: "power2.out",
+        },
+        "=-0.5"
+      );
+    }
+  };
 };
 
 exports.pixel_hero = function () {

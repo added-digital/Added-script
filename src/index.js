@@ -1,8 +1,6 @@
 require("./components/nav").nav();
 require("./components/footer").footer();
 
-console.log("index 2");
-
 window.lenis = new Lenis({
   lerp: 0.1,
   wheelMultiplier: 0.7,
@@ -149,6 +147,35 @@ document.querySelectorAll(".horisontal_line").forEach((line) => {
   );
 });
 
+// Initialize underline link hover animations
+function initUnderlineLinkAnimations() {
+  const underlineLinks = document.querySelectorAll(".underline_link");
+
+  underlineLinks.forEach((link) => {
+    const underlineLine = link.querySelector(".underline_link-line");
+
+    if (underlineLine) {
+      // Hover in animation
+      link.addEventListener("mouseenter", () => {
+        gsap.to(underlineLine, {
+          width: "100%",
+          duration: 0.3,
+          ease: "power2.out",
+        });
+      });
+
+      // Hover out animation
+      link.addEventListener("mouseleave", () => {
+        gsap.to(underlineLine, {
+          width: "0%",
+          duration: 0.3,
+          ease: "power2.out",
+        });
+      });
+    }
+  });
+}
+
 // Page transition configuration
 const pageTransitionConfig = {
   "/": "",
@@ -193,35 +220,6 @@ internalLinks.forEach((link) => {
     handlePageTransition(href);
   });
 });
-
-// Initialize underline link hover animations
-function initUnderlineLinkAnimations() {
-  const underlineLinks = document.querySelectorAll(".underline_link");
-
-  underlineLinks.forEach((link) => {
-    const underlineLine = link.querySelector(".underline_link-line");
-
-    if (underlineLine) {
-      // Hover in animation
-      link.addEventListener("mouseenter", () => {
-        gsap.to(underlineLine, {
-          width: "100%",
-          duration: 0.3,
-          ease: "power2.out",
-        });
-      });
-
-      // Hover out animation
-      link.addEventListener("mouseleave", () => {
-        gsap.to(underlineLine, {
-          width: "0%",
-          duration: 0.3,
-          ease: "power2.out",
-        });
-      });
-    }
-  });
-}
 
 // Handle the page transition
 function handlePageTransition(newPath) {
