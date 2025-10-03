@@ -86,7 +86,7 @@ exports.hero_images = function () {
 
   const config = {
     imageUrls: shuffleArray(originalImageUrls), // Shuffle the array
-    popupDuration: 1, // seconds - shorter duration for cleaner look
+    popupDuration: 20, // seconds - shorter duration for cleaner look
     heightImageSize: 200,
     widthImageSize: 200,
     popupDistance: 10,
