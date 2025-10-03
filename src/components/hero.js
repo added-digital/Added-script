@@ -8,12 +8,10 @@ exports.hero = function () {
   const { createLogoAnimation } = require("../reusables/logo");
   const tl = gsap.timeline();
 
-  const navlinks = document.querySelectorAll(".nav_link");
-
   const hero_header = document.querySelector("[data-lines-hero='true']");
   gsap.set(hero_header, { visibility: "visible" });
-
   gsap.set(".section_card-flip", { visibility: "visible" });
+
 
   const hero_text = document.querySelector("[data-hero-text]");
   gsap.set(hero_text, { visibility: "visible" });
@@ -27,8 +25,10 @@ exports.hero = function () {
     type: "chars, words",
     linesClass: "line",
   });
-
-  const logoTl = createLogoAnimation(tl, a, d1, d2, e, d3);
+  
+  document.fonts.ready.then(() => {
+    const logoTl = createLogoAnimation(tl, a, d1, d2, e, d3);
+  });
 
   // Responsive width based on screen size
   const getResponsiveWidth = () => {
