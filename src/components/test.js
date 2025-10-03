@@ -264,7 +264,6 @@ exports.hero_images = function () {
   window.addEventListener("beforeunload", cleanup);
 
   // Initialize pre-fetching of images
-  console.log("Starting to pre-fetch hero images...");
   // prefetchImages(config.imageUrls, (loaded, total) => {
   //   const percentage = Math.round((loaded / total) * 100);
   //   console.log(`Pre-fetching progress: ${loaded}/${total} (${percentage}%)`);

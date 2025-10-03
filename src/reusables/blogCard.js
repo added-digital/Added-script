@@ -48,6 +48,5 @@ exports.blogCard = function () {
         });
       });
     }
-    console.log(blogImg);
   });
 };

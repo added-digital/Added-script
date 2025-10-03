@@ -74,12 +74,10 @@ function createImageSwapper(containerSelector, imageArray, options = {}) {
 
   const container = document.querySelector(containerSelector);
   if (!container) {
-    console.warn(`Image swapper: Container "${containerSelector}" not found`);
     return null;
   }
 
   if (!imageArray || imageArray.length === 0) {
-    console.warn("Image swapper: No images provided");
     return null;
   }
 

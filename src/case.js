@@ -5,7 +5,7 @@ const descriptionItemLines = document.querySelectorAll(".horisontal_line-case");
 const heroImageReveal = document.querySelectorAll(".case_hero-reveal");
 const clientLogo = document.querySelector(".case-hero_client-logo");
 const workPills = document.querySelectorAll(".work_pill");
-console.log("this will run");
+
 gsap.set(heroWrapper, {
   visibility: "visible",
 });
