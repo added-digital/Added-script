@@ -7,7 +7,7 @@ exports.hero = function () {
     const e = document.getElementById("e");
     const d3 = document.getElementById("d3");
     const { createLogoAnimation } = require("../reusables/logo");
-    const tl = gsap.timeline();
+    const tl = gsap.timeline({ paused: true });
 
     const hero_header = document.querySelector("[data-lines-hero='true']");
     gsap.set(hero_header, { visibility: "visible" });
@@ -173,6 +173,9 @@ exports.hero = function () {
         "=-0.5"
       );
     }
+    requestAnimationFrame(() => {
+      tl.play();
+    });
   });
 };
 
