@@ -174,7 +174,9 @@ exports.hero = function () {
       );
     }
     requestAnimationFrame(() => {
-      tl.play();
+      requestAnimationFrame(() => {
+        tl.play();
+      });
     });
   });
 };
