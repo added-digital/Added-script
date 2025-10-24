@@ -26,14 +26,19 @@ function initLogoSliderAnimation() {
 
   const groupWidth = firstGroup.offsetWidth;
 
-  // Create the infinite loop animation
-  gsap.to(logoSliderWrapper, {
-    x: -groupWidth, // Move by the width of one group
-    duration: 20, // Adjust duration for desired speed (20 seconds for slow, smooth movement)
+  // Set initial position to ensure smooth start
+  gsap.set(logoSliderWrapper, { x: 0 });
+
+  // Create a timeline for the infinite loop animation
+  const tl = gsap.timeline({ repeat: -1 });
+
+  // Animate the wrapper moving left by one group width
+  tl.to(logoSliderWrapper, {
+    x: -groupWidth,
+    duration: 15, // Adjust duration for desired speed (15 seconds for smooth movement)
     ease: "none", // Linear movement for consistent speed
-    repeat: -1, // Infinite repeat
     onComplete: function () {
-      // Reset position instantly when one cycle completes
+      // Instantly reset position for seamless loop
       gsap.set(logoSliderWrapper, { x: 0 });
     },
   });
