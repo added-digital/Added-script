@@ -40,6 +40,7 @@ function initSimpleHoverAnimation() {
         stagger: 0.02,
         ease: "power2.out",
       });
+      console.log("mouseenter");
     });
 
     // Hover out animation
@@ -50,6 +51,7 @@ function initSimpleHoverAnimation() {
         stagger: 0.01,
         ease: "power2.out",
       });
+      console.log("mouseleave");
     });
   });
 }
