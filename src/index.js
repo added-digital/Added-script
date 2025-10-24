@@ -147,6 +147,20 @@ document.querySelectorAll(".horisontal_line").forEach((line) => {
   );
 });
 
+document.querySelectorAll("[data-fade-in]").forEach((element) => {
+  gsap.from(element, {
+    opacity: 0,
+    y: 20,
+    duration: 0.5,
+    ease: "power2.out",
+    scrollTrigger: {
+      trigger: element,
+      start: "top 90%",
+      toggleActions: "play none none none",
+    },
+  });
+});
+
 // Initialize underline link hover animations
 function initUnderlineLinkAnimations() {
   const underlineLinks = document.querySelectorAll(".underline_link");
