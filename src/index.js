@@ -148,10 +148,13 @@ document.querySelectorAll(".horisontal_line").forEach((line) => {
 });
 
 document.querySelectorAll("[data-fade-in]").forEach((element) => {
+  const delay = parseFloat(element.getAttribute("data-delay")) || 0;
+
   gsap.from(element, {
     opacity: 0,
     y: 20,
     duration: 0.5,
+    delay: delay,
     ease: "power2.out",
     scrollTrigger: {
       trigger: element,
