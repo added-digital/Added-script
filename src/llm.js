@@ -14,12 +14,6 @@ function initSimpleHoverAnimation() {
   const hoverElements = document.querySelectorAll("[data-hover-animation]");
 
   hoverElements.forEach((originalElement) => {
-    // Debug: Log element details
-    console.log("Element:", originalElement);
-    console.log("Text content:", originalElement.textContent);
-    console.log("Inner HTML:", originalElement.innerHTML);
-    console.log("Element type:", originalElement.tagName);
-
     let element = originalElement;
     let textToAnimate = originalElement.textContent.trim();
 
@@ -60,12 +54,6 @@ function initSimpleHoverAnimation() {
     // Skip if no text content
     if (!textToAnimate) {
       console.warn("Element has no text content for split animation");
-      console.warn("Element details:", {
-        tagName: originalElement.tagName,
-        innerHTML: originalElement.innerHTML,
-        textContent: originalElement.textContent,
-        value: originalElement.value || "no value attribute",
-      });
       return;
     }
 
@@ -89,7 +77,6 @@ function initSimpleHoverAnimation() {
         stagger: 0.02,
         ease: "power2.out",
       });
-      console.log("mouseenter");
     });
 
     // Hover out animation
@@ -100,7 +87,6 @@ function initSimpleHoverAnimation() {
         stagger: 0.01,
         ease: "power2.out",
       });
-      console.log("mouseleave");
     });
   });
 }
