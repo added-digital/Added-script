@@ -38,7 +38,6 @@ function initSimpleHoverAnimation() {
         wrapper.style.left = "50%";
         wrapper.style.transform = "translate(-50%, -50%)";
         wrapper.style.pointerEvents = "none";
-        wrapper.style.color = "inherit";
         wrapper.style.fontSize = "inherit";
         wrapper.style.fontFamily = "inherit";
         wrapper.style.fontWeight = "inherit";
