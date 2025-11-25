@@ -202,7 +202,6 @@ const pageTransitionConfig = {
   "/blog": "light-mode",
   "/sv/blog": "light-mode",
   "/contact": "",
-  "/work/neumeister": "",
 };
 
 // Folder-based class configuration for efficiency
