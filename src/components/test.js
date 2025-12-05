@@ -264,15 +264,15 @@ exports.hero_images = function () {
   window.addEventListener("beforeunload", cleanup);
 
   // Initialize pre-fetching of images
-  // prefetchImages(config.imageUrls, (loaded, total) => {
-  //   const percentage = Math.round((loaded / total) * 100);
-  //   console.log(`Pre-fetching progress: ${loaded}/${total} (${percentage}%)`);
+  prefetchImages(originalImageUrls, (loaded, total) => {
+    const percentage = Math.round((loaded / total) * 100);
+    console.log(`Pre-fetching progress: ${loaded}/${total} (${percentage}%)`);
 
-  //   if (loaded === total) {
-  //     imagesPrefetched = true;
-  //     console.log("All hero images pre-fetched successfully!");
-  //   }
-  // }).catch((error) => {
-  //   console.error("Error during image pre-fetching:", error);
-  // });
+    if (loaded === total) {
+      imagesPrefetched = true;
+      console.log("All hero images pre-fetched successfully!");
+    }
+  }).catch((error) => {
+    console.error("Error during image pre-fetching:", error);
+  });
 };
