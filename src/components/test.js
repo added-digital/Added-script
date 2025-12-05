@@ -13,38 +13,84 @@ exports.hero_images = function () {
     return shuffled;
   }
 
-  // Pre-fetch images function
-  function prefetchImages(imageUrls, onProgress = null) {
+  // Pre-fetch images function with batching and idle time support
+  function prefetchImages(imageUrls, onProgress = null, options = {}) {
+    const {
+      batchSize = 5, // Load 5 images at a time
+      batchDelay = 200, // 200ms delay between batches
+      useIdleCallback = true, // Use requestIdleCallback when available
+    } = options;
+
     let loadedCount = 0;
     const totalImages = imageUrls.length;
+    const batches = [];
 
-    return Promise.all(
-      imageUrls.map((url) => {
-        return new Promise((resolve, reject) => {
-          const img = new Image();
+    // Split images into batches
+    for (let i = 0; i < imageUrls.length; i += batchSize) {
+      batches.push(imageUrls.slice(i, i + batchSize));
+    }
 
-          img.onload = () => {
-            loadedCount++;
-            if (onProgress) {
-              onProgress(loadedCount, totalImages);
+    // Load a single image
+    function loadImage(url) {
+      return new Promise((resolve) => {
+        const img = new Image();
+
+        img.onload = () => {
+          loadedCount++;
+          if (onProgress) {
+            onProgress(loadedCount, totalImages);
+          }
+          resolve(img);
+        };
+
+        img.onerror = () => {
+          console.warn(`Failed to pre-fetch image: ${url}`);
+          loadedCount++;
+          if (onProgress) {
+            onProgress(loadedCount, totalImages);
+          }
+          resolve(null);
+        };
+
+        img.src = url;
+      });
+    }
+
+    // Load a batch of images
+    async function loadBatch(batch) {
+      return Promise.all(batch.map(loadImage));
+    }
+
+    // Main loading function
+    async function loadAllBatches() {
+      for (let i = 0; i < batches.length; i++) {
+        await loadBatch(batches[i]);
+
+        // Add delay between batches (except for the last one)
+        if (i < batches.length - 1 && batchDelay > 0) {
+          await new Promise((resolve) => setTimeout(resolve, batchDelay));
+        }
+      }
+    }
+
+    // Use requestIdleCallback if available, otherwise start immediately
+    if (useIdleCallback && typeof requestIdleCallback !== "undefined") {
+      return new Promise((resolve, reject) => {
+        requestIdleCallback(
+          async () => {
+            try {
+              await loadAllBatches();
+              resolve();
+            } catch (error) {
+              reject(error);
             }
-            resolve(img);
-          };
-
-          img.onerror = () => {
-            console.warn(`Failed to pre-fetch image: ${url}`);
-            loadedCount++;
-            if (onProgress) {
-              onProgress(loadedCount, totalImages);
-            }
-            resolve(null); // Resolve with null instead of rejecting to continue with other images
-          };
-
-          // Start loading the image
-          img.src = url;
-        });
-      })
-    );
+          },
+          { timeout: 5000 } // Fallback after 5 seconds if idle never comes
+        );
+      });
+    } else {
+      return loadAllBatches();
+    }
   }
 
   const originalImageUrls = [
@@ -263,16 +309,31 @@ exports.hero_images = function () {
   // Clean up on page unload
   window.addEventListener("beforeunload", cleanup);
 
-  // Initialize pre-fetching of images
-  prefetchImages(originalImageUrls, (loaded, total) => {
-    const percentage = Math.round((loaded / total) * 100);
-    console.log(`Pre-fetching progress: ${loaded}/${total} (${percentage}%)`);
+  // Initialize pre-fetching of images after hero animation has started
+  // Delay to avoid interfering with hero animation (fonts loading + animation duration)
+  const heroAnimationDelay = 2000; // Wait 2 seconds for hero animation to start
 
-    if (loaded === total) {
-      imagesPrefetched = true;
-      console.log("All hero images pre-fetched successfully!");
-    }
-  }).catch((error) => {
-    console.error("Error during image pre-fetching:", error);
-  });
+  setTimeout(() => {
+    prefetchImages(
+      originalImageUrls,
+      (loaded, total) => {
+        const percentage = Math.round((loaded / total) * 100);
+        console.log(
+          `Pre-fetching progress: ${loaded}/${total} (${percentage}%)`
+        );
+
+        if (loaded === total) {
+          imagesPrefetched = true;
+          console.log("All hero images pre-fetched successfully!");
+        }
+      },
+      {
+        batchSize: 5, // Load 5 images at a time
+        batchDelay: 200, // 200ms between batches
+        useIdleCallback: true, // Use browser idle time when available
+      }
+    ).catch((error) => {
+      console.error("Error during image pre-fetching:", error);
+    });
+  }, heroAnimationDelay);
 };
